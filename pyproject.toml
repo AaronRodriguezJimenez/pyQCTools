@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61.0","wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mypyscf_tools"
+version = "0.0.1"
+description = "Small helpers to work with PySCF, OpenFermion and other functions from Julia"
+authors = [ { name="Aaron Rodriguez", email="aarodjim@gmail.com" } ]
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = ["pyscf"]
+
