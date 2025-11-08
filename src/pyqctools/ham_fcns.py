@@ -224,9 +224,7 @@ if __name__ == "__main__":
     # Example usage
     geometry= [
         ('H', (0.0000,  0.0000,  0.0000)),
-        ('H', (0.0000,  0.0000,  0.7400)),
-        ('H', (0.0000,  0.0000,  1.4800)),
-        ('H', (0.0000,  0.0000,  2.2200))]
+        ('H', (0.0000,  0.0000,  0.7400))]
 
     basis = 'sto-3g'
     mult = 1
@@ -239,6 +237,10 @@ if __name__ == "__main__":
     print('The Sparse pauli form is:')
     H_sparse_pauli = jw_to_sparse_pauli_op(hamiltonian)
     print(H_sparse_pauli)
+    for i, pauli in enumerate(H_sparse_pauli.paulis):
+        print(pauli, H_sparse_pauli.coeffs[i])
+
+
     print('The converted to Qiskit SparsePauliOp is: ')
     qiskit_operator = convert_openfermion_to_qiskit(hamiltonian, n_qubits)
     print(qiskit_operator)

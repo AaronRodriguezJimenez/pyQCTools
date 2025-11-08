@@ -233,3 +233,10 @@ def save_system(file, qubitop, ket):
             if σ == "Z" or σ == "Y": z ^= mask
         X.append(x); Z.append(z); C.append(c)
     numpy.savez(file, X=X, Z=Z, C=C, ket=ket)
+
+if __name__ == "__main__":
+    n = 8
+    na = 4
+    nb = 0
+    bitvect = referencevector(n, na, nb)
+    print(bitvect)
