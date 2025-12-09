@@ -10,6 +10,135 @@ from openfermion import QubitOperator
 import numpy as np
 import scipy as sp
 import itertools as it
+from pyscf import gto, scf, lo
+
+def get_mos_loc(mol, mf, freeze_orbitals=None, active_orbitals=None):
+    """
+     Returns localized (Boys) one- and two-particle MOs in pyscf order convention.
+    """
+    if freeze_orbitals is None: freeze_orbitals = []
+    if active_orbitals is None: active_orbitals = list(range(mol.nao))
+
+    # Get h1 and h2 mo_coeffs
+    Enuc = mol.energy_nuc()  # Nuclear repulsion
+    ao_kin = mol.intor('int1e_kin')  # Kinetic energy
+    ao_nuc = mol.intor('int1e_nuc')  # Nuclear-electron attraction
+    ao_one = ao_kin + ao_nuc  # One-particle Hamiltonian
+    ao_eri = mol.intor('int2e')  # electron-electron repulsion
+
+    # Localize MOs
+    CL = lo.boys.BF(mol, mf.mo_coeff)
+    CL.kernel()
+
+    # Transform to molecular orbital localized basis
+    mo_one_loc = of.general_basis_change(ao_one, CL.mo_coeff, (1, 0))
+    mo_eri_loc = of.general_basis_change(ao_eri, CL.mo_coeff, (1, 1, 0, 0))
+
+    # Trace out core orbitals and drop inactive virtuals
+    core, one, eri = of.ops.representations.get_active_space_integrals(mo_one_loc,
+                                                                       mo_eri_loc, freeze_orbitals, active_orbitals)
+    #
+    # Now we can contruct the molecular hamiltonian from the spatial orbital integrals
+    #
+    h0 = Enuc + core
+
+    return h0, one, eri
+
+def get_mos(mol, mf, freeze_orbitals=None, active_orbitals=None,):
+    """
+    Return canonical molecular orbitals in PySCF order concention
+    """
+    if freeze_orbitals is None: freeze_orbitals = []
+    if active_orbitals is None: active_orbitals = list(range(mol.nao))
+
+    # Compute Atomic orbital Integrals
+    Enuc = mol.energy_nuc()  # Nuclear repulsion
+    ao_kin = mol.intor('int1e_kin')  # Kinetic energy
+    ao_nuc = mol.intor('int1e_nuc')  # Nuclear-electron attraction
+    ao_one = ao_kin + ao_nuc  # One-particle Hamiltonian
+    ao_eri = mol.intor('int2e')  # electron-electron repulsion
+
+    # Transform to molecular orbital basis
+    mo_one = of.general_basis_change(ao_one, mf.mo_coeff, (1, 0))
+    mo_eri = of.general_basis_change(ao_eri, mf.mo_coeff, (1, 1, 0, 0))
+
+
+    # Trace out core orbitals and drop inactive virtuals
+    core, one, eri = of.ops.representations.get_active_space_integrals(mo_one,
+                                      mo_eri, freeze_orbitals, active_orbitals)
+    #
+    # Now we can contruct the molecular hamiltonian from the spatial orbital integrals
+    #
+    h0 = Enuc + core
+
+    return h0, one, eri
+
+
+
+# Next we will construct the Fermionic Hamiltonian using these localized orbitals
+def localize_boys(mol, mf):
+    # Get h1 and h2 mo_coeffs
+    Enuc = mol.energy_nuc()  # Nuclear repulsion
+    ao_kin = mol.intor('int1e_kin')  # Kinetic energy
+    ao_nuc = mol.intor('int1e_nuc')  # Nuclear-electron attraction
+    ao_one = ao_kin + ao_nuc  # One-particle Hamiltonian
+    ao_eri = mol.intor('int2e')  # electron-electron repulsion
+
+    # Localize MOs
+    CL = lo.boys.BF(mol, mf.mo_coeff)
+    CL.kernel()
+
+    # Transform to molecular orbital localized basis
+    mo_one_loc = of.general_basis_change(ao_one, CL.mo_coeff, (1, 0))
+    mo_eri_loc = of.general_basis_change(ao_eri, CL.mo_coeff, (1, 1, 0, 0))
+
+    return mo_one_loc, mo_eri_loc
+
+def fermionop_from_molecule(mol, mf,
+                            freeze_orbitals=None, active_orbitals=None,
+                            localized_orbitals=False):
+    """
+    Constuct a molecular Hamiltonian from a pySCF molecule.
+    :param mol: mol object from PySCF
+    :param mo_coeff: array of the basis transformation from atomic to molecular orbitals
+    :param freeze_orbitals: list of spatial orbital indices to "freeze"
+    :param active_orbitals: list of active orbitals
+    :return: fermion_operator in OpenFermion format.
+    """
+    if freeze_orbitals is None: freeze_orbitals = []
+    if active_orbitals is None: active_orbitals = list(range(mol.nao))
+
+    # Compute Atomic orbital Integrals
+    Enuc = mol.energy_nuc()            #Nuclear repulsion
+    ao_kin = mol.intor('int1e_kin')   #Kinetic energy
+    ao_nuc = mol.intor('int1e_nuc')  #Nuclear-electron attraction
+    ao_one = ao_kin + ao_nuc        #One-particle Hamiltonian
+    ao_eri = mol.intor('int2e') #electron-electron repulsion
+
+    # Transform to molecular orbital basis
+    if localized_orbitals:
+        mo_one, mo_eri = localize_boys(mol, mf)
+    else:
+        mo_one = of.general_basis_change(ao_one, mf.mo_coeff, (1,0))
+        mo_eri = of.general_basis_change(ao_eri, mf.mo_coeff, (1,1,0,0))
+
+    mo_eri = mo_eri.transpose(0,2,3,1)  #OpenFermion Tensor convention.
+
+    # Trace out core orbitals and drop inactive virtuals
+    core, one, eri = of.ops.representations.get_active_space_integrals(mo_one,
+                                             mo_eri, freeze_orbitals, active_orbitals)
+
+    #
+    # Now we can contruct the molecular hamiltonian from the spatial orbital integrals
+    #
+    h0 = Enuc + core
+    print(h0, h0)
+
+    h1, h2 = of.ops.representations.get_tensors_from_integrals(one, eri)
+    interop = of.InteractionOperator(h0, h1, h2)
+    fop = of.get_fermion_operator(interop) #fop = fermion operator
+    return fop
+
 
 def convert_openfermion_to_qiskit(openfermion_operator: QubitOperator, num_qubits: int) -> SparsePauliOp:
     terms = openfermion_operator.terms
