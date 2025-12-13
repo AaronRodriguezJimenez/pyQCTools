@@ -69,6 +69,17 @@ def H2(d=0.7414):
         ('H', (0, 0, d)),
     ]
 
+def N2(d=1.098):
+    """ Diatomic molecular hydrogen with bond distance `d`.
+
+    Defaults give experimental geometry as taken from NIST CCCBDB.
+
+    """
+    return [
+        ('N', (0, 0, 0)),
+        ('N', (0, 0, d)),
+    ]
+
 def LiH(d=1.595):
     """ Lithium hydride with bond distance `d`.
 

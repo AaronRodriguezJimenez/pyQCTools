@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0f1158e-c416-40ed-9a19-3f1552869634" name="Changes" comment="Added new utilities and functions">
+    <list default="true" id="b0f1158e-c416-40ed-9a19-3f1552869634" name="Changes" comment="Added boys localization, Fermionic hamiltonian from MOS and MO extraction functions.">
+      <change afterPath="$PROJECT_DIR$/tests/fci_example.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/get_loc_mos.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/orbitals_from_pyscf.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pyqctools/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pyqctools/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pyqctools/geometries.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pyqctools/geometries.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pyqctools/ham_fcns.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pyqctools/ham_fcns.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pyqctools/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pyqctools/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/ccsd_example.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/ccsd_example.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,21 +49,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ham_fcns.executor&quot;: &quot;Run&quot;,
-    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Python tests for tests.get_loc_mos.test_localized_mos_preserves_hf.executor": "Run",
+    "Python tests.Python tests in test_get_loc_mos.py.executor": "Run",
+    "Python.__init__.executor": "Run",
+    "Python.ccsd_example.executor": "Run",
+    "Python.fci_example.executor": "Run",
+    "Python.get_loc_mos.executor": "Run",
+    "Python.ham_fcns.executor": "Run",
+    "Python.localized_orbitals.executor": "Run",
+    "Python.orbitals_from_pyscf.executor": "Run",
+    "Python.utils.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
-  <component name="RunManager" selected="Python.ham_fcns">
-    <configuration name="ham_fcns" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+}]]></component>
+  <component name="RunManager" selected="Python.get_loc_mos">
+    <configuration name="fci_example" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -68,11 +79,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/pyqctools" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/pyqctools/ham_fcns.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/fci_example.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -81,7 +92,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="utils" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="get_loc_mos" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -90,23 +101,78 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/pyqctools" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/pyqctools/utils.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/get_loc_mos.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="orbitals_from_pyscf" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pyQCTools" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/orbitals_from_pyscf.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for tests.get_loc_mos.test_localized_mos_preserves_hf" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="pyQCTools" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests.get_loc_mos.test_localized_mos_preserves_hf&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests in get_loc_mos.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="pyQCTools" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/get_loc_mos.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.ham_fcns" />
-        <item itemvalue="Python.utils" />
+        <item itemvalue="Python.get_loc_mos" />
+        <item itemvalue="Python tests.Python tests for tests.get_loc_mos.test_localized_mos_preserves_hf" />
+        <item itemvalue="Python tests.Python tests in get_loc_mos.py" />
+        <item itemvalue="Python.fci_example" />
+        <item itemvalue="Python.orbitals_from_pyscf" />
       </list>
     </recent_temporary>
   </component>
@@ -149,12 +215,38 @@
       <option name="project" value="LOCAL" />
       <updated>1762221661465</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added new utilities and functions">
+      <option name="closed" value="true" />
+      <created>1762642549116</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1762642549116</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Ethylene geometry and calculation with ccsd, ccsd(t) examples.">
+      <option name="closed" value="true" />
+      <created>1765320830220</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1765320830220</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added boys localization, Fermionic hamiltonian from MOS and MO extraction functions.">
+      <option name="closed" value="true" />
+      <created>1765320879313</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1765320879313</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="Added new utilities and functions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added new utilities and functions" />
+    <MESSAGE value="Ethylene geometry and calculation with ccsd, ccsd(t) examples." />
+    <MESSAGE value="Added boys localization, Fermionic hamiltonian from MOS and MO extraction functions." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added boys localization, Fermionic hamiltonian from MOS and MO extraction functions." />
   </component>
 </project>
