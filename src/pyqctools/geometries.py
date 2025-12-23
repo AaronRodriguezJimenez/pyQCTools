@@ -80,6 +80,17 @@ def N2(d=1.098):
         ('N', (0, 0, d)),
     ]
 
+def Cr2(d=1.50):
+    """ Diatomic molecular hydrogen with bond distance `d`.
+
+    Defaults give experimental geometry as taken from NIST CCCBDB.
+
+    """
+    return [
+        ('Cr', (0, 0, 0)),
+        ('Cr', (0, 0, d)),
+    ]
+
 def LiH(d=1.595):
     """ Lithium hydride with bond distance `d`.
 

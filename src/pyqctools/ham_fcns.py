@@ -12,21 +12,6 @@ import scipy as sp
 import itertools as it
 from pyscf import gto, scf, lo
 
-def check_OV_mixing(mol, mf, C_loc):
-    S = mol.intor('int1e_ovlp')
-    C = mf.mo_coeff
-    nocc = int(mol.nelectron // 2)
-    occ_mask = np.arange(nocc)
-    # projector onto canonical occupied AO subspace (original HF occ MOs)
-    P_occ = C[:, :nocc] @ C[:, :nocc].T
-    # project localized MOs onto the occupied subspace
-    proj = C_loc.T @ P_occ @ C_loc   # size (n_mo, n_mo)
-    # Check off-diagonal block between occupied (0:nocc) and virtual (nocc:)
-    off = proj[:nocc, nocc:]
-    max_off = np.max(np.abs(off))
-    print("max absolute O->V component in localized MOs:", max_off)
-    # also show diag of occupied block (should be ~1 on diag for first nocc)
-    print("occupied-block diag (first 5):", np.diag(proj)[:min(5, len(np.diag(proj)))])
 
 
 def get_mos_loc(mol, mf, freeze_orbitals=None, active_orbitals=None):
@@ -99,8 +84,6 @@ def get_mos_loc(mol, mf, freeze_orbitals=None, active_orbitals=None):
     # Now we can contruct the molecular hamiltonian from the spatial orbital integrals
     #
     h0 = Enuc + core
-
-    check_OV_mixing(mol, mf, C_loc)
 
     return h0, one, eri
 

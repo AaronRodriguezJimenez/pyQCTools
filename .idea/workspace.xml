@@ -4,15 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0f1158e-c416-40ed-9a19-3f1552869634" name="Changes" comment="Added boys localization, Fermionic hamiltonian from MOS and MO extraction functions.">
-      <change afterPath="$PROJECT_DIR$/tests/fci_example.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/get_loc_mos.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/orbitals_from_pyscf.py" afterDir="false" />
+    <list default="true" id="b0f1158e-c416-40ed-9a19-3f1552869634" name="Changes" comment="Corrected localization and added examples">
+      <change afterPath="$PROJECT_DIR$/tests/CASSCF_example.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/cr2_PES.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/cr2_get_mos.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/hubbard_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/n2_PES.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/n2_get_mos.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pyqctools/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pyqctools/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pyqctools/geometries.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pyqctools/geometries.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pyqctools/ham_fcns.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pyqctools/ham_fcns.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/ccsd_example.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/ccsd_example.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pyqctools/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pyqctools/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/fci_example.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/fci_example.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/get_loc_mos.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/get_loc_mos.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,23 +59,37 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python tests.Python tests for tests.get_loc_mos.test_localized_mos_preserves_hf.executor": "Run",
     "Python tests.Python tests in test_get_loc_mos.py.executor": "Run",
+    "Python.CASSCF_example.executor": "Run",
     "Python.__init__.executor": "Run",
     "Python.ccsd_example.executor": "Run",
+    "Python.cr2_PES.executor": "Run",
+    "Python.cr2_get_mos.executor": "Run",
+    "Python.endoedral_energies_deltaH.executor": "Run",
     "Python.fci_example.executor": "Run",
     "Python.get_loc_mos.executor": "Run",
     "Python.ham_fcns.executor": "Run",
+    "Python.hubbard_test.executor": "Run",
     "Python.localized_orbitals.executor": "Run",
+    "Python.n2_PES.executor": "Run",
+    "Python.n2_get_mos.executor": "Run",
     "Python.orbitals_from_pyscf.executor": "Run",
+    "Python.read_tensors.executor": "Run",
     "Python.utils.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
+    "last_opened_file_path": "/Users/admin/PycharmProjects/pyQCTools/tests",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
-  <component name="RunManager" selected="Python.get_loc_mos">
-    <configuration name="fci_example" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.hubbard_test">
+    <configuration name="CASSCF_example" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -83,7 +102,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/fci_example.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/CASSCF_example.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -92,7 +111,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="get_loc_mos" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="endoedral_energies_deltaH" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -105,7 +124,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/get_loc_mos.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/endoedral_energies_deltaH.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -114,7 +133,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="orbitals_from_pyscf" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="hubbard_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -127,7 +146,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/orbitals_from_pyscf.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/hubbard_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -136,43 +155,57 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for tests.get_loc_mos.test_localized_mos_preserves_hf" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="n2_get_mos" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.get_loc_mos.test_localized_mos_preserves_hf&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/n2_get_mos.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests in get_loc_mos.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="read_tensors" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/N2_tensors_sto3g" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/get_loc_mos.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/N2_tensors_sto3g/read_tensors.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.get_loc_mos" />
-        <item itemvalue="Python tests.Python tests for tests.get_loc_mos.test_localized_mos_preserves_hf" />
-        <item itemvalue="Python tests.Python tests in get_loc_mos.py" />
-        <item itemvalue="Python.fci_example" />
-        <item itemvalue="Python.orbitals_from_pyscf" />
+        <item itemvalue="Python.hubbard_test" />
+        <item itemvalue="Python.endoedral_energies_deltaH" />
+        <item itemvalue="Python.CASSCF_example" />
+        <item itemvalue="Python.n2_get_mos" />
+        <item itemvalue="Python.read_tensors" />
       </list>
     </recent_temporary>
   </component>
@@ -239,7 +272,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765320879313</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Corrected localization and added examples">
+      <option name="closed" value="true" />
+      <created>1765584849654</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1765584849654</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -247,6 +288,7 @@
     <MESSAGE value="Added new utilities and functions" />
     <MESSAGE value="Ethylene geometry and calculation with ccsd, ccsd(t) examples." />
     <MESSAGE value="Added boys localization, Fermionic hamiltonian from MOS and MO extraction functions." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added boys localization, Fermionic hamiltonian from MOS and MO extraction functions." />
+    <MESSAGE value="Corrected localization and added examples" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrected localization and added examples" />
   </component>
 </project>

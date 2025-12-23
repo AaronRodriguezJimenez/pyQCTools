@@ -7,8 +7,9 @@ from pyqctools import ethylene
 # 1. Define Molecule
 Ethyl = pq.ethylene()
 water = pq.H2O()
+n2 = pq.N2()
 
-mol = gto.M(atom=Ethyl,
+mol = gto.M(atom=n2,#Ethyl,
             basis='sto-3g',
             spin=0,
             cart=True,

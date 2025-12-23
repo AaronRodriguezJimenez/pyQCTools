@@ -5,10 +5,6 @@ import openfermion as of
 from openfermion.ops import InteractionOperator
 from openfermion.linalg import get_sparse_operator
 
-
-# Example usage (uncomment / run in your session)
-# test_localized_mos_preserves_hf(mol, mf, get_mos_loc)
-
 # 1. Define Molecule
 Ethyl = pq.ethylene()
 water = pq.H2O()
