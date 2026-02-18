@@ -1,0 +1,5 @@
+NOTEs:
+
+For calculations using DBF, check test examples:
+dest_dbf_N2_AS_old: This works with spinorbital tensors in physics notation.
+test_dbf_N2_AS_new: This works with MOs in chemist notation (tensors are build up inside)

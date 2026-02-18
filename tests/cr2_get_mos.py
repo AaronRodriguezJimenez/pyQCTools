@@ -39,7 +39,8 @@ def get_active_space_tensors(mc, localized=False):
         # Localize only the active space part of the MOs
         active_mos = mo_coeff[:, ncore:ncore + ncas]
         # Pipek-Mezey is often more stable for d-orbitals than Boys
-        loc_obj = lo.PipekMezey(mc.mol, active_mos).kernel()
+        #loc_obj = lo.PipekMezey(mc.mol, active_mos).kernel()
+        loc_obj = lo.boys.BF(mc.mol, active_mos).kernel() #Boys
 
         mo_coeff_final = mo_coeff.copy()
         mo_coeff_final[:, ncore:ncore + ncas] = loc_obj
@@ -83,6 +84,16 @@ def run_proj(b, dm, mo, ci=None, return_tensors=False):
     ehf_val = mf.scf(dm)
     ehf.append(ehf_val)
 
+    nmo = mf.mo_coeff.shape[1]
+    nao = mol.nao_nr()
+    nelec = mol.nelectron  # should be 48
+    nocc = nelec // 2
+
+    print("NAO (basis functions)      :", nao)
+    print("Number of MOs (nmo)        :", nmo)
+    print("Number of electrons        :", nelec)
+    print("Number of doubly occ MOs   :", nocc)
+
     mc = mcscf.CASSCF(mf, 12, 12)
     mc.fcisolver.conv_tol = 1e-7
     mc.fcisolver.threads = 1
@@ -115,7 +126,7 @@ def run_proj(b, dm, mo, ci=None, return_tensors=False):
 
     # Return DM for next RHF, and MO/CI for next CASSCF and spinorbital tensors
     if return_tensors is True:
-        return mf.make_rdm1(), mo, ci, h0_spatial, h1_spin, h2_spin
+        return mf.make_rdm1(), mo, ci, caslst, h0_spatial, h1_spin, h2_spin
     else:
         return mf.make_rdm1(), mo, ci
 
@@ -132,7 +143,7 @@ for b in np.arange(1.5, 1.51, .1):
 # Collect tensors for JWmapping
 dir = "Cr2_tensors_sto3g"
 for b in reversed(np.arange(1.5, 1.51, .1)):
-    dm, mo, ci, H0, H1, H2 = run_proj(b, dm, mo, ci, True)
+    dm, mo, ci, caslst, H0, H1, H2 = run_proj(b, dm, mo, ci, True)
     print(f"Tensors at {b} distance:")
     print(H0)
     print("- - - -")
@@ -152,7 +163,7 @@ emc2 = emc[len(x):]
 ehf2.reverse()
 emc2.reverse()
 
-with open('cr2-scan.txt', 'w') as fout:
+with open('Cr2_tensors_sto3g/cr2-scan.txt', 'w') as fout:
     fout.write('     HF 1.5->3.0     CAS(12,12)      HF 3.0->1.5     CAS(12,12)\n')
     for i, xi in enumerate(x):
         fout.write('%2.1f  %12.8f  %12.8f  %12.8f  %12.8f\n'

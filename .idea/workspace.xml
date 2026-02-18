@@ -4,20 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0f1158e-c416-40ed-9a19-3f1552869634" name="Changes" comment="Corrected localization and added examples">
-      <change afterPath="$PROJECT_DIR$/tests/CASSCF_example.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/cr2_PES.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/cr2_get_mos.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/hubbard_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/n2_PES.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/n2_get_mos.py" afterDir="false" />
+    <list default="true" id="b0f1158e-c416-40ed-9a19-3f1552869634" name="Changes" comment="Added many molecule test issues.">
+      <change afterPath="$PROJECT_DIR$/tests/DFT/NOs_and_exc_from_density.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/DFT/custom_sr-DFT_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/DFT/initial_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Lutein/goat_guess.xyz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Lutein/make_cas_integrals.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Lutein/test.xyz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/UHF_integrals.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/n2_get_mos_rhf-CASCI_AS.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/n2_get_mos_rhf-CASSCF_AS.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/n2_get_mos_rhf_full.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/n2_get_mos_sto3g.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/n2_get_mos_uhf_full.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/scf_stability.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pyqctools/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pyqctools/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pyqctools/geometries.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pyqctools/geometries.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pyqctools/ham_fcns.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pyqctools/ham_fcns.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pyqctools/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pyqctools/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/fci_example.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/fci_example.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/get_loc_mos.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/get_loc_mos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/N2_tensors_sto3g/read_tensors.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/N2_tensors_CASSCF_sto3g/read_tensors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/cr2_PES.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/cr2_PES.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/cr2_get_mos.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/cr2_get_mos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/extract_integrals_example.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/AS-notes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/n2_get_mos.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/n2_get_mos_ccpvdz.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,22 +65,41 @@
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python tests.Python tests for tests.get_loc_mos.test_localized_mos_preserves_hf.executor": "Run",
+    "Python tests.Python tests in test_SR_LR.py.executor": "Run",
     "Python tests.Python tests in test_get_loc_mos.py.executor": "Run",
     "Python.CASSCF_example.executor": "Run",
+    "Python.SR_LR_test.executor": "Run",
+    "Python.UHF_integrals.executor": "Run",
+    "Python.XC_energy_from_density.executor": "Run",
     "Python.__init__.executor": "Run",
     "Python.ccsd_example.executor": "Run",
     "Python.cr2_PES.executor": "Run",
     "Python.cr2_get_mos.executor": "Run",
+    "Python.custom_sr-DFT.executor": "Run",
     "Python.endoedral_energies_deltaH.executor": "Run",
+    "Python.exc_from_density.executor": "Run",
     "Python.fci_example.executor": "Run",
     "Python.get_loc_mos.executor": "Run",
     "Python.ham_fcns.executor": "Run",
+    "Python.hf_srDFT.executor": "Run",
     "Python.hubbard_test.executor": "Run",
+    "Python.initial_test.executor": "Run",
     "Python.localized_orbitals.executor": "Run",
     "Python.n2_PES.executor": "Run",
     "Python.n2_get_mos.executor": "Run",
+    "Python.n2_get_mos_ccpvdz.executor": "Run",
+    "Python.n2_get_mos_hf.executor": "Run",
+    "Python.n2_get_mos_rhf_full.executor": "Run",
+    "Python.n2_get_mos_sto3g.executor": "Run",
+    "Python.n2_get_mos_sto3g_complete.executor": "Run",
+    "Python.n2_get_mos_uhf.executor": "Run",
+    "Python.n2_get_mos_uhf_full.executor": "Run",
+    "Python.n2_mos_CASCI_ccpvdz.executor": "Run",
     "Python.orbitals_from_pyscf.executor": "Run",
+    "Python.read_tensor.executor": "Run",
     "Python.read_tensors.executor": "Run",
+    "Python.scf_stability.executor": "Run",
+    "Python.test.executor": "Run",
     "Python.utils.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -86,10 +112,16 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/tests" />
+      <recent name="$PROJECT_DIR$/tests/N2_tensors_ccpvdz" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests" />
+      <recent name="$PROJECT_DIR$/tests/DFT" />
+      <recent name="$PROJECT_DIR$/tests/Cr2_tensors_sto3g" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.hubbard_test">
-    <configuration name="CASSCF_example" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.n2_get_mos_rhf_full">
+    <configuration name="UHF_integrals" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -102,7 +134,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/CASSCF_example.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/UHF_integrals.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -111,7 +143,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="endoedral_energies_deltaH" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="n2_get_mos_rhf-CASSCF_AS" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -124,7 +156,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/endoedral_energies_deltaH.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/n2_get_mos_rhf-CASSCF_AS.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -133,7 +165,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="hubbard_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="n2_get_mos_rhf_full" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -146,7 +178,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/hubbard_test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/n2_get_mos_rhf_full.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -155,7 +187,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="n2_get_mos" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="n2_get_mos_uhf_full" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -168,7 +200,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/n2_get_mos.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/n2_get_mos_uhf_full.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -177,7 +209,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="read_tensors" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="scf_stability" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -186,11 +218,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/N2_tensors_sto3g" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/N2_tensors_sto3g/read_tensors.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/scf_stability.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -201,11 +233,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.hubbard_test" />
-        <item itemvalue="Python.endoedral_energies_deltaH" />
-        <item itemvalue="Python.CASSCF_example" />
-        <item itemvalue="Python.n2_get_mos" />
-        <item itemvalue="Python.read_tensors" />
+        <item itemvalue="Python.n2_get_mos_rhf_full" />
+        <item itemvalue="Python.n2_get_mos_uhf_full" />
+        <item itemvalue="Python.UHF_integrals" />
+        <item itemvalue="Python.n2_get_mos_rhf-CASSCF_AS" />
+        <item itemvalue="Python.scf_stability" />
       </list>
     </recent_temporary>
   </component>
@@ -280,7 +312,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765584849654</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added many molecule test issues.">
+      <option name="closed" value="true" />
+      <created>1766448140981</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1766448140981</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -289,6 +329,7 @@
     <MESSAGE value="Ethylene geometry and calculation with ccsd, ccsd(t) examples." />
     <MESSAGE value="Added boys localization, Fermionic hamiltonian from MOS and MO extraction functions." />
     <MESSAGE value="Corrected localization and added examples" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrected localization and added examples" />
+    <MESSAGE value="Added many molecule test issues." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added many molecule test issues." />
   </component>
 </project>

@@ -151,7 +151,7 @@ emc1 = emc[:len(x)]
 emc2 = emc[len(x):]
 ehf2.reverse()
 emc2.reverse()
-with open('cr2-scan.txt', 'w') as fout:
+with open('Cr2_tensors_sto3g/cr2-scan.txt', 'w') as fout:
     fout.write('     HF 1.5->3.0     CAS(12,12)      HF 3.0->1.5     CAS(12,12)\n')
     for i, xi in enumerate(x):
         fout.write('%2.1f  %12.8f  %12.8f  %12.8f  %12.8f\n'

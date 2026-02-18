@@ -87,7 +87,7 @@ def get_mos_loc(mol, mf, freeze_orbitals=None, active_orbitals=None):
 
     return h0, one, eri
 
-def get_mos(mol, mf, freeze_orbitals=None, active_orbitals=None,):
+def get_mos(mol, mf, freeze_orbitals=None, active_orbitals=None, physicist=True):
     """
     Return canonical molecular orbitals in PySCF order concention
     """
@@ -104,7 +104,10 @@ def get_mos(mol, mf, freeze_orbitals=None, active_orbitals=None,):
     # Transform to molecular orbital basis
     mo_one = of.general_basis_change(ao_one, mf.mo_coeff, (1, 0))
     mo_eri = of.general_basis_change(ao_eri, mf.mo_coeff, (1, 1, 0, 0))
-    mo_eri = mo_eri.transpose(0, 2, 3, 1)  # OpenFermion Tensor convention.
+
+    if physicist:
+        mo_eri = mo_eri.transpose(0, 2, 3, 1)  # OpenFermion Tensor convention.
+
 
     # Trace out core orbitals and drop inactive virtuals
     core, one, eri = of.ops.representations.get_active_space_integrals(mo_one,

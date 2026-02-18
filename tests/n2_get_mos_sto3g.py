@@ -2,6 +2,7 @@
   In this example, we illustrate how to get Active MOS
   for N2 using a scan technique for getting the correct orbitals
   in the active space.
+  CREATES: SPINORBITALS in physicist notation
 
 # Nitrogen (Z=7), Dimer has 14 electrons.
 # (10e, 8o) active space leaves 4 electrons (2 orbitals) in the core.
@@ -55,8 +56,9 @@ def get_active_space_tensors(mc, localized=False):
         from pyscf import lo
         # Localize only the active space part of the MOs
         active_mos = mo_coeff[:, ncore:ncore + ncas]
-        # Pipek-Mezey is often more stable for d-orbitals than Boys
-        loc_obj = lo.PipekMezey(mc.mol, active_mos).kernel()
+        # Boys or Pipek-Mezey, the latter is often more stable for d-orbitals than Boys
+        #loc_obj = lo.PipekMezey(mc.mol, active_mos).kernel()
+        loc_obj = lo.boys.BF(mc.mol, active_mos).kernel()
 
         mo_coeff_final = mo_coeff.copy()
         mo_coeff_final[:, ncore:ncore + ncas] = loc_obj
@@ -74,7 +76,7 @@ def get_active_space_tensors(mc, localized=False):
     h2_spatial = ao2mo.restore(1, h2_active, ncas).transpose(0, 2, 3, 1)
 
     # 4. Total Constant Energy (Nuclear repulsion + Frozen Core energy)
-    h0 = mc.energy_nuc() + core_energy
+    h0 = core_energy
 
     return h0, h1_active, h2_spatial
 
@@ -83,13 +85,14 @@ emc = []
 def run_proj(b, dm, mo, ci=None, return_tensors=False):
     mol = gto.Mole()
     mol.verbose = 4
-    mol.output = 'N2-%2.1f.out' % b
+    mol.output = './N2_tensors_sto3g/N2-%2.1f.out' % b
     mol.atom = [
         ['N', (0.0, 0.0, -b/2)],
         ['N', (0, 0, b/2)],
     ]
     mol.basis = 'sto-3g'
     mol.symmetry = 'D2h' # D2h is more numerically robust than Dooh
+    mol.spin = 0
     mol.build()
 
     mf = scf.RHF(mol)
@@ -127,7 +130,7 @@ def run_proj(b, dm, mo, ci=None, return_tensors=False):
         mo = mcscf.project_init_guess(mc, mo)
 
     # Simplified extraction
-    h0_spatial, h1_spatial, h2_spatial = get_active_space_tensors(mc, False)
+    h0_spatial, h1_spatial, h2_spatial = get_active_space_tensors(mc, True)
 
     # Convert to Spin-Orbital Tensors using OpenFermion
     h1_spin, h2_spin = of.ops.representations.get_tensors_from_integrals(h1_spatial, h2_spatial)
@@ -162,9 +165,9 @@ for b in reversed(np.arange(0.5, 3.01, .1)):
     print(f"Tensors at {b} distance:")
     print(H0)
     print("- - - -")
-    print(H1)
+    #print(H1)
     print("- - - -")
-    print(H2)
+    #print(H2)
     print("- - - -")
     print(f"Saving tensors to folder {dir}")
     save_tensors(b, H0, H1, H2, folder=dir)
@@ -179,15 +182,16 @@ ehf2.reverse()
 emc2.reverse()
 
 with open('N2-scan.txt', 'w') as fout:
-    fout.write('     HF 1.5->3.0     CAS(12,12)      HF 3.0->1.5     CAS(12,12)\n')
+    fout.write('     HF 1.5->3.0     CAS(10e,8o)      HF 3.0->1.5     CAS(10e,8o)\n')
     for i, xi in enumerate(x):
         fout.write('%2.1f  %12.8f  %12.8f  %12.8f  %12.8f\n'
                    % (xi, ehf1[i], emc1[i], ehf2[i], emc2[i]))
 
+
 import matplotlib.pyplot as plt
 plt.plot(x, ehf1, label='HF,1.5->3.0')
 plt.plot(x, ehf2, label='HF,3.0->1.5')
-plt.plot(x, emc1, label='CAS(12,12),1.5->3.0')
-plt.plot(x, emc2, label='CAS(12,12),3.0->1.5')
+plt.plot(x, emc1, label='CAS(10e,8o),1.5->3.0')
+plt.plot(x, emc2, label='CAS(10e,8o),3.0->1.5')
 plt.legend()
 plt.show()
