@@ -87,8 +87,8 @@ def get_active_space_tensors(mc, localized=False, include_all_noncore=False):
     # 2) Two-electron: compute using ao2mo.full with the exact MO block we want.
     #    This mirrors what CASSCF.get_h2eff does internally, but allows any target size.
     # -----------------------
-    # mo block for h2 calculation: shape (nao, target_ncas)
-    mo_for_h2 = mo_coeff[:, start:stop].copy()
+    # mo block for calculation: shape (nao, target_ncas)
+    mo_for_mol = mo_coeff[:, start:stop].copy()
 
     # Warning: building a full (n,n,n,n) tensor scales as n^4 memory.
     # For n=26, that's ~26^4 ~ 456,976 elements (float64 ~ 3.7 MB) — actually fine,
@@ -96,9 +96,9 @@ def get_active_space_tensors(mc, localized=False, include_all_noncore=False):
     try:
         # If underlying SCF has precomputed eri available (faster), use it
         if hasattr(mc._scf, "_eri") and getattr(mc._scf, "_eri", None) is not None:
-            eri = ao2mo.full(mc._scf._eri, mo_for_h2, max_memory=mc.max_memory)
+            eri = ao2mo.full(mc._scf._eri, mo_for_mol, max_memory=mc.max_memory)
         else:
-            eri = ao2mo.full(mc.mol, mo_for_h2, verbose=mc.verbose, max_memory=mc.max_memory)
+            eri = ao2mo.full(mc.mol, mo_for_mol, verbose=mc.verbose, max_memory=mc.max_memory)
     except Exception as e:
         raise RuntimeError("Failed to build two-electron integrals with ao2mo.full: " + str(e)) from e
 
@@ -127,7 +127,7 @@ def get_active_space_tensors(mc, localized=False, include_all_noncore=False):
     h2_spatial = eri #.transpose(0, 2, 3, 1).copy() #Use that transpose for the physicists notation
 
     # 3) Constant term: nuclear repulsion + frozen-core electronic energy
-    h0 = float(core_energy)
+    h0 = mc.energy_nuc() + float(core_energy)
 
     return h0, h1_active, h2_spatial
 
@@ -155,32 +155,26 @@ def run_proj(b, dm, mo, ci=None, return_tensors=False):
     ehf_val = mf.scf(dm)
     ehf.append(ehf_val)
 
-    mc = mcscf.CASSCF(mf, 8, 10)
+    mc = mcscf.CASCI(mf, 8, 10)
     mc.fcisolver.conv_tol = 1e-7
     mc.fcisolver.threads = 1
 #    mc.fcisolver.nroots = 10
 
-    if mo is None:
-        # --- INITIAL POINT SETUP ---
-        ncas = {
-            'Ag': 2,  # 2s sigma_g and 2pz sigma_g
-            'B1u': 2,  # 2s sigma_u and 2pz sigma_u
-            'B2u': 1,  # 2px pi_u
-            'B3u': 1,  # 2py pi_u
-            'B2g': 1,  # 2px pi_g*
-            'B3g': 1  # 2py pi_g*
-        }
+    ncas = {
+        'Ag': 2,  # 2s sigma_g and 2pz sigma_g
+        'B1u': 2,  # 2s sigma_u and 2pz sigma_u
+        'B2u': 1,  # 2px pi_u
+        'B3u': 1,  # 2py pi_u
+        'B2g': 1,  # 2px pi_g*
+        'B3g': 1  # 2py pi_g*
+    }
 
-        ncore = {
-            'Ag': 1,  # 1s sigma_g
-            'B1u': 1  # 1s sigma_u
-        }
+    ncore = {
+        'Ag': 1,  # 1s sigma_g
+        'B1u': 1  # 1s sigma_u
+    }
 
-        mo = mcscf.sort_mo_by_irrep(mc, mf.mo_coeff, ncas, ncore)
-    else:
-        # --- PROJECTION STEP ---
-        # Project MOs from the previous geometry onto the current basis
-        mo = mcscf.project_init_guess(mc, mo)
+    mo = mcscf.sort_mo_by_irrep(mc, mf.mo_coeff, ncas, ncore)
  
     # Run CASSCF using projected MOs and previous CI vector
     # Kernel returns: Total Energy, E_cas, CI_vector, MO_coeffs, MO_energies
@@ -205,7 +199,7 @@ def run_proj(b, dm, mo, ci=None, return_tensors=False):
 
 # --- Scan Logic ---
 dm = mo = ci = None
-nuc_separation = np.arange(1.0, 3.01, .1)
+nuc_separation = np.arange(0.5, 3.01, .1)
 # Forward scan
 for b in nuc_separation:
     dm, mo, ci = run_proj(b, dm, mo, ci, False)
@@ -235,7 +229,7 @@ emc2 = emc[len(x):]
 ehf2.reverse()
 emc2.reverse()
 
-with open('N2-scan.txt', 'w') as fout:
+with open('../tests/N2-scan.txt', 'w') as fout:
     fout.write('     HF 1.5->3.0     CAS(8o,10e)      HF 3.0->1.5     CAS(12,12)\n')
     for i, xi in enumerate(x):
         fout.write('%2.1f  %12.8f  %12.8f  %12.8f  %12.8f\n'

@@ -207,7 +207,7 @@ emc2 = efci[len(x):]
 ehf2.reverse()
 emc2.reverse()
 
-with open('N2-scan.txt', 'w') as fout:
+with open('../tests/N2-scan.txt', 'w') as fout:
     fout.write('     UHF 1.5->3.0     FCI      UHF 3.0->1.5     FCI\n')
     for i, xi in enumerate(x):
         fout.write('%2.1f  %12.8f  %12.8f  %12.8f  %12.8f\n'

@@ -1,4 +1,6 @@
 # General utilities
+import numpy as np
+import openfermion
 
 #- PySCF
 def set_basis_and_build(mol, basis):
@@ -12,9 +14,6 @@ def compute_scf_energy(mf):
 # PySCFWorkspace created by Kyle Sherbert
 
 """ """
-import openfermion
-import numpy
-
 def totalparitycheck(n, η):
     """ The binary code for a Z2 symmetry corresponding to total particle number.
 
@@ -95,7 +94,7 @@ def referencevector(n, ηα, ηβ):
         as is standard in openfermion (but not qiskit!).
 
     """
-    bitvector = numpy.zeros(n, dtype=int)
+    bitvector = np.zeros(n, dtype=int)
     for i in range(ηα): bitvector[2*i] = 1
     for i in range(ηβ): bitvector[2*i+1] = 1
     return bitvector
@@ -232,10 +231,9 @@ def save_system(file, qubitop, ket):
             if σ == "X" or σ == "Y": x ^= mask
             if σ == "Z" or σ == "Y": z ^= mask
         X.append(x); Z.append(z); C.append(c)
-    numpy.savez(file, X=X, Z=Z, C=C, ket=ket)
+    np.savez(file, X=X, Z=Z, C=C, ket=ket)
 
 def hubbard_2d_tensors(Nx, Ny, t, U, periodic_y=False):
-    import numpy as np
     n_sites = Nx * Ny
     h1 = np.zeros((n_sites, n_sites))
     h2 = np.zeros((n_sites, n_sites, n_sites, n_sites))

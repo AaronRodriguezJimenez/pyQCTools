@@ -63,3 +63,10 @@ mf = scf.RHF(mol)
 energy = pq.compute_scf_energy(mf)
 println("SCF energy: ", energy)
 ```
+
+### Brief descriptions:
+**ham_fcns.py**   :: Fermion and Qubit Hamiltonian support functions working with OpenFermion and Qiskit.
+
+**geometries.py** :: A library with selected molecule geometries.
+
+**int_fcns.py**   :: Functions to get Molecular integrals and save them in npz files.

@@ -1,5 +1,5 @@
 '''
-SCF wavefunction stability analysis
+SCF wavefunction stability analysis Example from pyscf
 '''
 
 from pyscf import gto, scf
