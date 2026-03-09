@@ -173,7 +173,7 @@ def get_unrestricted_ints_full(mol, mf, localized=False, debug=True):
 
     return h0, h1_alpha, h1_beta, h2_aa, h2_bb, h2_ab
 
-def get_restricted_active_space_integrals(mol, mc, localized=False, include_all_noncore=False):
+def get_restricted_active_space_integrals(mol, mf, mc, localized=False, include_all_noncore=False):
     """
     Compute molecular integrals for a selected active space from a restricted SCF
     case. Extract effective active-space Hamiltonian for either:
@@ -278,7 +278,7 @@ def get_unrestricted_active_space_integrals(mol, mc, localized=False, include_al
     Therefore it uses a mc pyscf object.
     :return: H0, H1, H2
     """
-    Ca, Cb = mf.mo_coeff.copy()
+    Ca, Cb = mc.mo_coeff.copy()
     ncore = int(mc.ncore)
     n_ao = Ca.shape[0]
     nmo = Ca.shape[1]

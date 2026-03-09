@@ -4,15 +4,15 @@
 import numpy as np
 from pyscf import gto, scf, ao2mo
 from pyscf.lib import logger
-from pyqctools.geometries import ethylene
+from pyqctools.geometries import H2
 import os
 
 mol = gto.Mole()
-mol.atom = ethylene()
-mol.basis = "sto3g"
+mol.atom = H2()
+mol.basis = "cc-pvdz"
 #mol.symmetry = True
 mol.verbose = 4
-mol.output = "./C2H4.out"
+mol.output = "./H2.out"
 mol.build()
 
 # Hartree-Fock calculation
@@ -40,15 +40,13 @@ stability_cycles = 10
 mf = stable_opt_internal(mf, stability_cycles)
 
 # Froze core
-ncore = 2
+ncore = 0
 nroots = 10
 ncas = mol.nao - ncore
 nelecas = mol.nelectron - 2*ncore   # total active electrons
-# split into alpha/beta (for singlet ground state, equally split)
-nelec_a = nelecas // 2
-nelec_b = nelecas // 2 # For s=0 #- nelec_a        # handles odd number of electrons if any
 
-# active MO coefficients used by FCI
+
+# active MO coefficients
 C = mf.mo_coeff
 C_active = C[:, ncore:ncore+ncas]
 nmos = C_active.shape[1]
@@ -67,10 +65,10 @@ def save_tensors(b, h0, h1, h2, folder="tensors"):
 
 def get_active_space_tensors(mol, mf, localized=False):
     """
-    Robustly extracts active space tensors from SymAdaptedCASSCF or CASSCF.
+    Full Molecular integrals in chemist's notation
     """
     # Froze core
-    ncore = 2
+    ncore = 0
     ncas = mol.nao - ncore
 
     # active MO coefficients used by FCI
@@ -111,9 +109,17 @@ def get_active_space_tensors(mol, mf, localized=False):
     h0 = nuc
     return h0, h1_spatial, h2_spatial
 
-h0, h1, h2 = get_active_space_tensors(mol, mf, localized=True)
+#0 h1, h2 = get_active_space_tensors(mol, mf, localized=True)
+from src.pyqctools.int_fcns import get_restricted_active_space_integrals
+from pyscf import mcscf
+mc = mcscf.CASCI(mf, 2, 2) # This will restrict ncore to the lowest 6 orbitals
+print("NCORE IS:", mc.ncore)
+
+h0, h1, h2 = get_restricted_active_space_integrals(mol, mf, mc, localized=True, include_all_noncore=False)
+
+
 dir = "/Users/admin/PycharmProjects/pyQCTools/QSP/dipole_moment"
-save_tensors("c2h4-RHF", h0, h1, h2, dir)
+save_tensors("h2-RHF", h0, h1, h2, dir)
 
 #= = = Dipole moment = = =
 def _charge_center(mol):
@@ -124,13 +130,15 @@ def _charge_center(mol):
 with mol.with_common_orig(_charge_center(mol)):
     dip_ao =  mol.intor_symmetric('int1e_r', comp=3)
 
+#print(mf.dip_moment()) #Total dipole moment expectation value fo a single SCF state
+
 #dip_mo = _contract_multipole(dip_ao, hermi=True, xy=None)
 # contract to full MO basis
 dip_mo_full = np.einsum('xij,ip,jq->xpq', dip_ao, C, C)
 
 # slice the active-active block consistently with C_active
 start = ncore
-stop  = ncore + ncas
+stop  = ncore + mc.ncas
 dip_mo = dip_mo_full[:, start:stop, start:stop]    # shape (3, nmos, nmos)
 
 #- - - Save integrals - - -
@@ -157,4 +165,4 @@ print(dip_mo[2].shape) #
 print("Hamiltonian shape:")
 print(h1.shape)
 print(h2.shape)
-save_dipole_integrals("c2h4-RHF", dip_mo, dir)
+save_dipole_integrals("h2-RHF", dip_mo, dir)

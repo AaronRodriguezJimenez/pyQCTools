@@ -9,5 +9,12 @@ description = "Small helpers to work with PySCF, OpenFermion and other functions
 authors = [ { name="Aaron Rodriguez", email="aarodjim@gmail.com" } ]
 readme = "README.md"
 requires-python = ">=3.8"
-dependencies = ["pyscf"]
+dependencies = [
+    "pyscf",
+    "numpy",
+    "scipy",
+    "openfermion",
+    "tabulate",
+    "qiskit"
+]
 
