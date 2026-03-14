@@ -4,25 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0f1158e-c416-40ed-9a19-3f1552869634" name="Changes" comment="Code reorganization, added new integral functions module and initial tests/examples for QSP">
-      <change afterPath="$PROJECT_DIR$/ExchCoups/exchcoup.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ExchCoups/ni_cubane.xyz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QSP/Benzene_and_acenes/Beneze_RHF_dipole_integrals.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QSP/Benzene_and_acenes/Benzene_orbitals.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QSP/Benzene_and_acenes/Naphthalene_orbitals.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/C2H4_RHF_dipole_moment_integrals.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/H2_singlets_example.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pyQCTools.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pyQCTools.iml" afterDir="false" />
+    <list default="true" id="b0f1158e-c416-40ed-9a19-3f1552869634" name="Changes" comment="Added new geometries and tests for benzene dipole moment integrals">
+      <change afterPath="$PROJECT_DIR$/ExchCoups/ExCoup_Nick/exchcoup.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ExchCoups/ExCoup_Nick/ni_cubane.xyz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ExchCoups/ExCoup_Nick/ni_cubane_data_sfcas/heis_map_energies.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ExchCoups/ExCoup_Nick/ni_cubane_data_sfcas/heis_map_proj_weights.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ExchCoups/ExCoup_Nick/ni_cubane_data_sfcas/heis_map_sort_ind.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ExchCoups/ExCoup_Nick/ni_cubane_data_sfcas/heis_map_vecs.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P1_RHF_dipole_moment_integrals.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P1_orbitals.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P2_RHF_dipole_moment_integrals.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P2_orbtials.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P3_RHF_dipole_moment_integrals.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P3_orbtials.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P4_RHF_dipole_moment_integrals.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P4_orbtials.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P5_RHF_dipole_moment_integrals.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P5_orbtials.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P6_RHF_dipole_moment_integrals.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P6_orbtials.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/vertical_gaps_Ethylene_CASSCF.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/vertical_gaps_Ethylene_CASnevpt2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TIPSCI_prep/He_8_ints_tipsci_example.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TIPSCI_prep/orbitalpartitioning.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QSP/RHF_dipole_moment_integrals.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/H2_RHF_dipole_moment_integrals.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QSP/fci_spectrum_ethylene.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/fci_spectrum_ethylene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QSP/td-dft_spectrum_benzene.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Benzene_and_acenes/td-dft_spectrum_benzene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QSP/td-dft_spectrum_ethylene.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/td-dft_spectrum_ethylene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pyqctools/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pyqctools/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pyqctools/geometries.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pyqctools/geometries.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pyqctools/int_fcns.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pyqctools/int_fcns.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/fci_example.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/fci_example.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExchCoups/exchcoup.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExchCoups/ni_cubane.xyz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/Benzene_and_acenes/Beneze_RHF_dipole_integrals.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Benzene_and_acenes/Benzene_RHF_dipole_integrals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/Benzene_and_acenes/Benzene_orbitals.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Benzene_and_acenes/Benzene_orbitals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/Benzene_and_acenes/Naphthalene_orbitals.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Benzene_and_acenes/Naphthalene_orbitals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/C2H4_RHF_dipole_moment_integrals.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +83,21 @@
     "Python.Fe_slab.executor": "Run",
     "Python.H2_RHF_dipole_moment_integrals.executor": "Run",
     "Python.H2_singlets_example.executor": "Run",
+    "Python.He_8_ints_tipsci_example (1).executor": "Run",
+    "Python.He_8_ints_tipsci_example.executor": "Run",
     "Python.Naphthalene_orbitals.executor": "Run",
+    "Python.P1_RHF_dipole_moment_integrals.executor": "Run",
+    "Python.P1_orbitals.executor": "Run",
+    "Python.P2_RHF_dipole_moment_integrals.executor": "Run",
+    "Python.P2_orbtials.executor": "Run",
+    "Python.P3_RHF_dipole_moment_integrals.executor": "Run",
+    "Python.P3_orbtials.executor": "Run",
+    "Python.P4_RHF_dipole_moment_integrals.executor": "Run",
+    "Python.P4_orbtials.executor": "Run",
+    "Python.P5_RHF_dipole_moment_integrals.executor": "Run",
+    "Python.P5_orbtials.executor": "Run",
+    "Python.P6_RHF_dipole_moment_integrals.executor": "Run",
+    "Python.P6_orbtials.executor": "Run",
     "Python.RHF_dipole_moment_integrals.executor": "Run",
     "Python.SR_LR_test.executor": "Run",
     "Python.UHF_integrals.executor": "Run",
@@ -115,21 +140,24 @@
     "Python.td-dft_spectrum_water.executor": "Run",
     "Python.test.executor": "Run",
     "Python.utils.executor": "Run",
+    "Python.vertical_gaps_Ethylene.executor": "Run",
+    "Python.vertical_gaps_Ethylene_CASSCF.executor": "Run",
+    "Python.vertical_gaps_Ethylene_CASnevpt2.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "/Users/admin/PycharmProjects/pyQCTools/QSP/Benzene_and_acenes",
+    "last_opened_file_path": "/Users/admin/PycharmProjects/pyQCTools/QSP/Corr_fcns",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/QSP/Corr_fcns" />
+      <recent name="$PROJECT_DIR$/QSP/Ethylene_and_polyenes" />
       <recent name="$PROJECT_DIR$/QSP/Benzene_and_acenes" />
       <recent name="$PROJECT_DIR$/tests" />
       <recent name="$PROJECT_DIR$/ExchCoups" />
-      <recent name="$PROJECT_DIR$/QSP" />
-      <recent name="$PROJECT_DIR$/tests/N2_tensors_ccpvdz" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/QSP/Benzene_and_acenes" />
@@ -139,8 +167,8 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Naphthalene_orbitals">
-    <configuration name="Beneze_RHF_dipole_integrals" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.Benzene_RHF_dipole_integrals">
+    <configuration name="Benzene_RHF_dipole_integrals" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -153,7 +181,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QSP/Benzene_and_acenes/Beneze_RHF_dipole_integrals.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QSP/Benzene_and_acenes/Benzene_RHF_dipole_integrals.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -171,7 +199,7 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/QSP/Benzene_and_acenes" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -184,7 +212,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="C2H4_RHF_dipole_moment_integrals" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="He_8_ints_tipsci_example (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -193,11 +221,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TIPSCI_prep" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/C2H4_RHF_dipole_moment_integrals.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TIPSCI_prep/He_8_ints_tipsci_example.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -206,29 +234,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Naphthalene_orbitals" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="pyQCTools" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/QSP/Benzene_and_acenes" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QSP/Benzene_and_acenes/Naphthalene_orbitals.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="exchcoup" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="He_8_ints_tipsci_example" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -241,7 +247,29 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ExchCoups/exchcoup.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ExchCoups/He_8_ints_tipsci_example.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="vertical_gaps_Ethylene_CASSCF" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pyQCTools" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/vertical_gaps_Ethylene_CASSCF.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -252,11 +280,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Naphthalene_orbitals" />
-        <item itemvalue="Python.Beneze_RHF_dipole_integrals" />
-        <item itemvalue="Python.C2H4_RHF_dipole_moment_integrals" />
+        <item itemvalue="Python.Benzene_RHF_dipole_integrals" />
         <item itemvalue="Python.Benzene_orbitals" />
-        <item itemvalue="Python.exchcoup" />
+        <item itemvalue="Python.He_8_ints_tipsci_example (1)" />
+        <item itemvalue="Python.He_8_ints_tipsci_example" />
+        <item itemvalue="Python.vertical_gaps_Ethylene_CASSCF" />
       </list>
     </recent_temporary>
   </component>
@@ -355,7 +383,15 @@
       <option name="project" value="LOCAL" />
       <updated>1771872700613</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Added new geometries and tests for benzene dipole moment integrals">
+      <option name="closed" value="true" />
+      <created>1773096790006</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1773096790006</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -367,6 +403,7 @@
     <MESSAGE value="Added many molecule test issues." />
     <MESSAGE value="Scripts for:&#10;- Getting N2 dissociation Molecular integrals for DBF&#10;- SCF stability test" />
     <MESSAGE value="Code reorganization, added new integral functions module and initial tests/examples for QSP" />
-    <option name="LAST_COMMIT_MESSAGE" value="Code reorganization, added new integral functions module and initial tests/examples for QSP" />
+    <MESSAGE value="Added new geometries and tests for benzene dipole moment integrals" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added new geometries and tests for benzene dipole moment integrals" />
   </component>
 </project>

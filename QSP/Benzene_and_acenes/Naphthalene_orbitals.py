@@ -7,8 +7,6 @@
 from pyscf import gto, scf, lo, mcscf
 from pyscf.tools import cubegen
 from pyscf import symm
-import pyqctools as pq
-
 
 # 1. Define Molecule
 naphthalene = """
