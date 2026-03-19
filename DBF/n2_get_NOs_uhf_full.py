@@ -1,7 +1,5 @@
 """
-  In this example, we illustrate how to get Active MOS
-  for N2 using a scan technique for getting the correct orbitals
-  in the active space.
+  In this example, we illustrate how to get Active NOS
   CREATES: SPINORBITALS in physicist notation from RHF
   """
 
@@ -26,7 +24,7 @@ def save_tensors(b, h0, h1a, h1b, eri_aa, eri_bb, eri_ab, folder="tensors"):
                         h2aa=eri_aa, h2bb=eri_bb, h2ab=eri_ab)
     print(f"Tensors saved to {filename}")
 
-def get_active_space_tensors(mol, mf, localized=False, debug=True):
+def get_active_space_tensors(mol, mf, localized=False, natural=False, debug=True):
     """
     Robustly extract active-space tensors supporting UHF (and RHF fallback).
     Accepts multiple mo_coeff / mo_occ layouts (tuple/list, 2D, or 3D with spin axis).
@@ -68,6 +66,8 @@ def get_active_space_tensors(mol, mf, localized=False, debug=True):
         print("  Cb.shape:", Cb.shape)
         print("  a_nocc:", a_nocc)
         print("  b_nocc:", b_nocc)
+        #print("  occ_a.shape:", occ_a.shape)
+        #print("  occ_b.shape:", occ_b.shape)
 
     # Localization (Boys) separately for occ/vir, per spin
     if localized:
@@ -88,6 +88,40 @@ def get_active_space_tensors(mol, mf, localized=False, debug=True):
 
         Ca_final = np.column_stack((a_loc_occ, a_loc_vir)) if (a_loc_occ.size + a_loc_vir.size) > 0 else Ca.copy()
         Cb_final = np.column_stack((b_loc_occ, b_loc_vir)) if (b_loc_occ.size + b_loc_vir.size) > 0 else Cb.copy()
+
+    elif natural:
+        # Create Natural orbitals:
+        dm = mf.make_rdm1()
+        dma, dmb = dm[0], dm[1]
+        S = mf.get_ovlp()
+
+        # Solve generalized eigenproblem D C = S C n
+        # eigh returns eigenvalues in ascending order by default
+        from scipy.linalg import eigh  # generalized Hermitian eigensolver
+        eigvals_a, eigvecs_a = eigh(dma, S)
+        eigvals_b, eigvecs_b = eigh(dmb, S)
+
+        # sort descending (largest occupations first)
+        idx_a = eigvals_a.argsort()[::-1]
+        idx_b = eigvals_b.argsort()[::-1]
+
+        NOs_a = eigvecs_a[:, idx_a]  # columns are AO coefficients of natural orbitals
+        NOs_b = eigvecs_b[:, idx_b]  # columns are AO coefficients of natural orbitals
+
+        Ca_final = NOs_a
+        Cb_final = NOs_b
+
+        #CHECKS: Orthonormality in AO metric
+        #occ_a = eigvals_a[idx_a]
+        #occ_b = eigvals_b[idx_b]
+        #assert np.allclose(Ca_final.conj().T @ S @ Ca_final, np.eye(Ca_final.shape[1]), atol=1e-10)
+        #assert np.allclose(Cb_final.conj().T @ S @ Cb_final, np.eye(Cb_final.shape[1]), atol=1e-10)
+        # Density reconstruction in AO basis
+        #Da_rec = S @ Ca_final @ np.diag(occ_a) @ Ca_final.conj().T @ S
+        #Db_rec = S @ Cb_final @ np.diag(occ_b) @ Cb_final.conj().T @ S
+        #assert np.allclose(Da_rec, dma, atol=1e-10)
+        #assert np.allclose(Db_rec, dmb, atol=1e-10)
+
     else:
         Ca_final = Ca.copy()
         Cb_final = Cb.copy()
@@ -120,7 +154,7 @@ efci = []
 def run_proj(b, get_ints):
     mol = gto.Mole()
     mol.verbose = 4
-    mol.output = '/Users/admin/PycharmProjects/pyQCTools/DBF/N2_tensors_uhf/N2-%2.1f.out' % b
+    mol.output = '/Users/admin/PycharmProjects/pyQCTools/DBF/N2_tensors_uhf_NOs/N2-%2.1f.out' % b
     mol.atom = [
         ['N', (0.0, 0.0, -b/2)],
         ['N', (0, 0, b/2)],
@@ -128,8 +162,6 @@ def run_proj(b, get_ints):
     mol.basis = 'sto-3g'
    # mol.symmetry = 'D2h' # D2h is more numerically robust than Dooh
     mol.spin = 0
-    mol.charge=0
-    mol.cart=True
     mol.build()
 
     mf = scf.UHF(mol)
@@ -158,22 +190,24 @@ def run_proj(b, get_ints):
 
     stability_cycles = 10
     mf.run()
-    mf_stable = stable_opt_internal(mf, stability_cycles)
-    ehf_val = mf_stable.kernel()
+    mf = stable_opt_internal(mf, stability_cycles)
+    ehf_val = mf.kernel()
     ehf.append(ehf_val)
     print(f"Total UHF energy: {ehf_val}")
-    print(f"Number of alpha electrons: {mf_stable.nelec[0]}")
-    print(f"Number of beta electrons: {mf_stable.nelec[1]}")
+    print(f"Number of alpha electrons: {mf.nelec[0]}")
+    print(f"Number of beta electrons: {mf.nelec[1]}")
 
     # 4. Analyze results (e.g., spin contamination)
     # <S^2> should be 3.75 for a quartet (S=3/2, S(S+1)=3.75)
-    ss = mf_stable.spin_square()
+    ss = mf.spin_square()
     print(f"Spin square <S^2>: {ss[0]}")
 
     # Get spatial integrals
     if get_ints:
-        h0, h1a, h1b, eri_aa, eri_bb, eri_ab = get_active_space_tensors(mol, mf_stable, localized=True)
-        dir = "/Users/admin/PycharmProjects/pyQCTools/DBF/N2_tensors_uhf"
+        h0, h1a, h1b, eri_aa, eri_bb, eri_ab = get_active_space_tensors(mol, mf,
+                                                                        localized=False,
+                                                                        natural=True)
+        dir = "/Users/admin/PycharmProjects/pyQCTools/DBF/N2_tensors_uhf_NOs"
         save_tensors(b, h0, h1a, h1b, eri_aa, eri_bb, eri_ab, dir)
 
 
@@ -206,7 +240,7 @@ emc2 = efci[len(x):]
 ehf2.reverse()
 emc2.reverse()
 
-with open('/Users/admin/PycharmProjects/pyQCTools/DBF/N2_tensors_uhf/N2-scan.txt', 'w') as fout:
+with open('/Users/admin/PycharmProjects/pyQCTools/DBF/N2_tensors_uhf_NOs/N2-scan.txt', 'w') as fout:
     fout.write('     UHF 1.5->3.0     FCI      UHF 3.0->1.5     FCI\n')
     for i, xi in enumerate(x):
         fout.write('%2.1f  %12.8f  %12.8f  %12.8f  %12.8f\n'
