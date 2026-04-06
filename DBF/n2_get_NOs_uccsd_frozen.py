@@ -1,11 +1,6 @@
-"""
-  In this example, we illustrate how to get Active NOS
-  CREATES: SPINORBITALS in physicist notation from RHF
-  """
-
 import numpy as np
 from pyscf import gto
-from pyscf import scf, fci
+from pyscf import scf, fci, cc
 from pyscf import lo
 from pyscf import ao2mo
 import os
@@ -24,11 +19,12 @@ def save_tensors(b, h0, h1a, h1b, eri_aa, eri_bb, eri_ab, folder="tensors"):
                         h2aa=eri_aa, h2bb=eri_bb, h2ab=eri_ab)
     print(f"Tensors saved to {filename}")
 
-def get_active_space_tensors(mol, mf, localized=False, natural=False, debug=True):
+def get_active_space_tensors(mol, nat_ccsd_coeff, mf, localized=False, ccsd=False, natural=False, debug=True):
     """
     Robustly extract active-space tensors supporting UHF (and RHF fallback).
     Accepts multiple mo_coeff / mo_occ layouts (tuple/list, 2D, or 3D with spin axis).
-
+    Adapted function using natural orbitals ccsd natural orbitals, this must be
+    provided with setting ccsd=True, SCF orbitals will be used if uccsd=False
     Returns:
       h0, h1_alpha, h1_beta, h2_aa, h2_bb, h2_ab
     Optionally also Ca_final, Cb_final when return_mos=True.
@@ -38,17 +34,21 @@ def get_active_space_tensors(mol, mf, localized=False, natural=False, debug=True
     # AO & nuclear
     ao_kin = mol.intor('int1e_kin', hermi=1)
     ao_nuc = mol.intor('int1e_nuc', hermi=1)
-    ao_obi = mf.get_hcore() #ao_kin + ao_nuc
-    ao_eri = mf._eri  # mol.intor('int2e')
+    ao_obi = ao_kin + ao_nuc
+    ao_eri = mol.intor('int2e')
 
     n_ao = ao_obi.shape[0]
 
     # get mo_coeff and mo_occ robustly
-    mo_coeff = getattr(mf, 'mo_coeff', None)
-    if mo_coeff is None:
-        raise ValueError("mf.mo_coeff is None")
+    if ccsd==False:
+        mo_coeff = getattr(mf, 'mo_coeff', None)
+        if mo_coeff is None:
+            raise ValueError("mf.mo_coeff is None")
 
-    Ca, Cb = mo_coeff
+        Ca, Cb = mo_coeff
+    else:
+        Ca, Cb = nat_ccsd_coeff
+
 
     # number of MOs
     nmo_a = Ca.shape[1]
@@ -154,7 +154,7 @@ efci = []
 def run_proj(b, get_ints):
     mol = gto.Mole()
     mol.verbose = 4
-    mol.output = '/Users/admin/PycharmProjects/pyQCTools/DBF/N2_tensors_uhf_NOs/N2-%2.1f.out' % b
+    mol.output = '/Users/admin/PycharmProjects/pyQCTools/DBF/N2_tensors_ccsd_frozen/N2-%2.1f.out' % b
     mol.atom = [
         ['N', (0.0, 0.0, -b/2)],
         ['N', (0, 0, b/2)],
@@ -200,14 +200,55 @@ def run_proj(b, get_ints):
     # 4. Analyze results (e.g., spin contamination)
     # <S^2> should be 3.75 for a quartet (S=3/2, S(S+1)=3.75)
     ss = mf.spin_square()
-    print(f"Spin square <S^2>: {ss[0]}")
+    print(f"UHF spin square <S^2>: {ss[0]}")
+
+    # 5. Perform UCCSD for improved natural orbitals
+    mycc = cc.CCSD(mf, frozen=0)
+    mycc.kernel()
+    mycc.solve_lambda()
+    rdm1 = mycc.make_rdm1()
+
+    # Containers for results
+    no_coeffs = []
+    no_occs = []
+
+    # 2. Process each spin channel
+    #    Since rdm1 is (28, 28), we use the full mf.mo_coeff (28, 28)
+    for spin_idx, (dm, mo_c_full) in enumerate(zip(rdm1, mf.mo_coeff)):
+        spin_label = "Alpha" if spin_idx == 0 else "Beta"
+
+        # Diagonalize the FULL 1-RDM
+        # This naturally recovers:
+        #   - Frozen Core orbitals (Occupancy = 1.0)
+        #   - Active Natural Orbitals (Occupancy between 0 and 1)
+        occ_vals, vecs = np.linalg.eigh(dm)
+
+        # Sort High -> Low
+        idx = occ_vals.argsort()[::-1]
+        occ_vals = occ_vals[idx]
+        vecs = vecs[:, idx]
+
+        # Transform to AO basis
+        # (28, 28) = (28, 28) . (28, 28)
+        no_c = np.dot(mo_c_full, vecs)
+
+        no_coeffs.append(no_c)
+        no_occs.append(occ_vals)
+
+        print(f"{spin_label} Natural Occupancies (Top 10):")
+        print(f"  {occ_vals}")
+
+    # Final objects
+    no_coeff_uhf = np.array(no_coeffs)
+    #no_occ_uhf = np.array(no_occs)
 
     # Get spatial integrals
     if get_ints:
-        h0, h1a, h1b, eri_aa, eri_bb, eri_ab = get_active_space_tensors(mol, mf,
-                                                                        localized=True,
+        h0, h1a, h1b, eri_aa, eri_bb, eri_ab = get_active_space_tensors(mol, no_coeff_uhf, mf,
+                                                                        localized=False,
+                                                                        ccsd=True,
                                                                         natural=False)
-        dir = "/Users/admin/PycharmProjects/pyQCTools/DBF/N2_tensors_uhf_NOs"
+        dir = "/Users/admin/PycharmProjects/pyQCTools/DBF/N2_tensors_ccsd_frozen"
         save_tensors(b, h0, h1a, h1b, eri_aa, eri_bb, eri_ab, dir)
 
 
@@ -240,7 +281,7 @@ emc2 = efci[len(x):]
 ehf2.reverse()
 emc2.reverse()
 
-with open('/Users/admin/PycharmProjects/pyQCTools/DBF/N2_tensors_uhf_NOs/N2-scan.txt', 'w') as fout:
+with open('/Users/admin/PycharmProjects/pyQCTools/DBF/N2_tensors_ccsd_frozen/N2-scan.txt', 'w') as fout:
     fout.write('     UHF 1.5->3.0     FCI      UHF 3.0->1.5     FCI\n')
     for i, xi in enumerate(x):
         fout.write('%2.1f  %12.8f  %12.8f  %12.8f  %12.8f\n'
