@@ -9,7 +9,7 @@ import os
 
 mol = gto.Mole()
 mol.atom = H2()
-mol.basis = "cc-pvdz"
+mol.basis = "sto-3g"
 #mol.symmetry = True
 mol.verbose = 4
 mol.output = "./H2.out"
