@@ -32,7 +32,7 @@ mc.fcisolver.nroots = 10  # Let's compute various roots
 e_tot, _, ci, mo, _ = mc.kernel()
 mc.analyze()  #with verbose=4 prints details about the calculation
 
-exit()
+
 # - - - FCI - - -
 myhf = mol.RHF().run()
 # create an FCI solver based on the SCF object

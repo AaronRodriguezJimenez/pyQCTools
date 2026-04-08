@@ -4,12 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0f1158e-c416-40ed-9a19-3f1552869634" name="Changes" comment="Checked functions for UHF integrals">
-      <change afterPath="$PROJECT_DIR$/DBF/n2_get_NOs_uccsd_frozen.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DBF/n2_get_NOs_uccsd_full.py" afterDir="false" />
+    <list default="true" id="b0f1158e-c416-40ed-9a19-3f1552869634" name="Changes" comment="H2-RHF vertical gaps">
+      <change afterPath="$PROJECT_DIR$/QSP/Benzene_and_acenes/Benzene_vertical_gaps_CASSCF.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P3_vertical_gaps_CASSCF.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P4_vertical_gaps_CASSCF.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P5_vertical_gaps_CASSCF.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P6_vertical_gaps_CASSCF.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QSP/small_molecules/vertical_gaps_H2_FCI.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DBF/n2_get_NOs_uhf_full.py" beforeDir="false" afterPath="$PROJECT_DIR$/DBF/n2_get_NOs_uhf_full.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/UHF_natural_orbitals.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/UHF_natural_orbitals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/vertical_gaps_Ethylene_CASSCF.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P1_vertical_gaps_CASSCF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/H2_RHF_dipole_moment_integrals.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/small_molecules/H2_RHF_dipole_moment_integrals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/vertical_gaps_H2_CASSCF.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P2_vertical_gaps_CASSCF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/H2_singlets_example.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/H2_singlets_example.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,109 +52,117 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Python tests for tests.get_loc_mos.test_localized_mos_preserves_hf.executor": "Run",
-    "Python tests.Python tests in test_SR_LR.py.executor": "Run",
-    "Python tests.Python tests in test_get_loc_mos.py.executor": "Run",
-    "Python.Beneze_RHF_dipole_integrals.executor": "Run",
-    "Python.Benzene_orbitals.executor": "Run",
-    "Python.C2H4_RHF_dipole_moment_integrals.executor": "Run",
-    "Python.CASSCF_example.executor": "Run",
-    "Python.Fe_slab.executor": "Run",
-    "Python.H2_RHF_dipole_moment_integrals.executor": "Run",
-    "Python.H2_singlets_example.executor": "Run",
-    "Python.He_8_ints_tipsci_example (1).executor": "Run",
-    "Python.He_8_ints_tipsci_example.executor": "Run",
-    "Python.Naphthalene_orbitals.executor": "Run",
-    "Python.P1_RHF_dipole_moment_integrals.executor": "Run",
-    "Python.P1_orbitals.executor": "Run",
-    "Python.P2_RHF_dipole_moment_integrals.executor": "Run",
-    "Python.P2_orbtials.executor": "Run",
-    "Python.P3_RHF_dipole_moment_integrals.executor": "Run",
-    "Python.P3_orbtials.executor": "Run",
-    "Python.P4_RHF_dipole_moment_integrals.executor": "Run",
-    "Python.P4_orbtials.executor": "Run",
-    "Python.P5_RHF_dipole_moment_integrals.executor": "Run",
-    "Python.P5_orbtials.executor": "Run",
-    "Python.P6_RHF_dipole_moment_integrals.executor": "Run",
-    "Python.P6_orbtials.executor": "Run",
-    "Python.RHF_dipole_moment_integrals.executor": "Run",
-    "Python.SR_LR_test.executor": "Run",
-    "Python.UHF_integrals.executor": "Run",
-    "Python.UHF_natural_orbitals.executor": "Run",
-    "Python.XC_energy_from_density.executor": "Run",
-    "Python.__init__.executor": "Run",
-    "Python.ccsd_example.executor": "Run",
-    "Python.cr2_PES.executor": "Run",
-    "Python.cr2_get_mos.executor": "Run",
-    "Python.custom_sr-DFT.executor": "Run",
-    "Python.dipole_moment_integrals.executor": "Run",
-    "Python.dipole_moment_op.executor": "Run",
-    "Python.endoedral_energies_deltaH.executor": "Run",
-    "Python.exc_from_density.executor": "Run",
-    "Python.exchcoup.executor": "Run",
-    "Python.fci_example.executor": "Run",
-    "Python.fci_spectrum_ethylene.executor": "Run",
-    "Python.get_loc_mos.executor": "Run",
-    "Python.ham_fcns.executor": "Run",
-    "Python.hf_srDFT.executor": "Run",
-    "Python.hubbard_test.executor": "Run",
-    "Python.initial_test.executor": "Run",
-    "Python.int_fcns.executor": "Run",
-    "Python.localized_orbitals.executor": "Run",
-    "Python.n2_PES.executor": "Run",
-    "Python.n2_get_NOs_uccsd_frozen.executor": "Run",
-    "Python.n2_get_NOs_uccsd_full.executor": "Run",
-    "Python.n2_get_NOs_uhf_full.executor": "Run",
-    "Python.n2_get_mos.executor": "Run",
-    "Python.n2_get_mos_ccpvdz.executor": "Run",
-    "Python.n2_get_mos_hf.executor": "Run",
-    "Python.n2_get_mos_rhf_full.executor": "Run",
-    "Python.n2_get_mos_sto3g.executor": "Run",
-    "Python.n2_get_mos_sto3g_complete.executor": "Run",
-    "Python.n2_get_mos_uhf.executor": "Run",
-    "Python.n2_get_mos_uhf_full.executor": "Run",
-    "Python.n2_mos_CASCI_ccpvdz.executor": "Run",
-    "Python.orbitals_from_pyscf.executor": "Run",
-    "Python.read_tensor.executor": "Run",
-    "Python.read_tensors.executor": "Run",
-    "Python.scf_stability.executor": "Run",
-    "Python.td-dft_spectrum_benzene.executor": "Run",
-    "Python.td-dft_spectrum_ethylene.executor": "Run",
-    "Python.td-dft_spectrum_water.executor": "Run",
-    "Python.test.executor": "Run",
-    "Python.utils.executor": "Run",
-    "Python.vertical_gaps_Ethylene.executor": "Run",
-    "Python.vertical_gaps_Ethylene_CASSCF.executor": "Run",
-    "Python.vertical_gaps_Ethylene_CASnevpt2.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/Users/admin/PycharmProjects/pyQCTools/DBF",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Python tests for tests.get_loc_mos.test_localized_mos_preserves_hf.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_SR_LR.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_get_loc_mos.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Beneze_RHF_dipole_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Benzene_orbitals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.C2H4_RHF_dipole_moment_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.CASSCF_example.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Fe_slab.executor&quot;: &quot;Run&quot;,
+    &quot;Python.H2_RHF_dipole_moment_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.H2_singlets_example.executor&quot;: &quot;Run&quot;,
+    &quot;Python.He_8_ints_tipsci_example (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.He_8_ints_tipsci_example.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Naphthalene_orbitals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P1_RHF_dipole_moment_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P1_orbitals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P1_vertical_gaps_CASSCF.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P2_RHF_dipole_moment_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P2_orbtials.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P2_vertical_gaps_CASSCF.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P3_RHF_dipole_moment_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P3_orbtials.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P3_vertical_gaps_CASSCF.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P4_RHF_dipole_moment_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P4_orbtials.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P4_vertical_gaps_CASSCF.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P5_RHF_dipole_moment_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P5_orbtials.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P5_vertical_gaps_CASSCF.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P6_RHF_dipole_moment_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P6_orbtials.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P6_vertical_gaps_CASSCF.executor&quot;: &quot;Run&quot;,
+    &quot;Python.RHF_dipole_moment_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.SR_LR_test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.UHF_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.UHF_natural_orbitals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.XC_energy_from_density.executor&quot;: &quot;Run&quot;,
+    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ccsd_example.executor&quot;: &quot;Run&quot;,
+    &quot;Python.cr2_PES.executor&quot;: &quot;Run&quot;,
+    &quot;Python.cr2_get_mos.executor&quot;: &quot;Run&quot;,
+    &quot;Python.custom_sr-DFT.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dipole_moment_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dipole_moment_op.executor&quot;: &quot;Run&quot;,
+    &quot;Python.endoedral_energies_deltaH.executor&quot;: &quot;Run&quot;,
+    &quot;Python.exc_from_density.executor&quot;: &quot;Run&quot;,
+    &quot;Python.exchcoup.executor&quot;: &quot;Run&quot;,
+    &quot;Python.fci_example.executor&quot;: &quot;Run&quot;,
+    &quot;Python.fci_spectrum_ethylene.executor&quot;: &quot;Run&quot;,
+    &quot;Python.get_loc_mos.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ham_fcns.executor&quot;: &quot;Run&quot;,
+    &quot;Python.hf_srDFT.executor&quot;: &quot;Run&quot;,
+    &quot;Python.hubbard_test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.initial_test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.int_fcns.executor&quot;: &quot;Run&quot;,
+    &quot;Python.localized_orbitals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.n2_PES.executor&quot;: &quot;Run&quot;,
+    &quot;Python.n2_get_NOs_uccsd_frozen.executor&quot;: &quot;Run&quot;,
+    &quot;Python.n2_get_NOs_uccsd_full.executor&quot;: &quot;Run&quot;,
+    &quot;Python.n2_get_NOs_uhf_full.executor&quot;: &quot;Run&quot;,
+    &quot;Python.n2_get_mos.executor&quot;: &quot;Run&quot;,
+    &quot;Python.n2_get_mos_ccpvdz.executor&quot;: &quot;Run&quot;,
+    &quot;Python.n2_get_mos_hf.executor&quot;: &quot;Run&quot;,
+    &quot;Python.n2_get_mos_rhf_full.executor&quot;: &quot;Run&quot;,
+    &quot;Python.n2_get_mos_sto3g.executor&quot;: &quot;Run&quot;,
+    &quot;Python.n2_get_mos_sto3g_complete.executor&quot;: &quot;Run&quot;,
+    &quot;Python.n2_get_mos_uhf.executor&quot;: &quot;Run&quot;,
+    &quot;Python.n2_get_mos_uhf_full.executor&quot;: &quot;Run&quot;,
+    &quot;Python.n2_mos_CASCI_ccpvdz.executor&quot;: &quot;Run&quot;,
+    &quot;Python.orbitals_from_pyscf.executor&quot;: &quot;Run&quot;,
+    &quot;Python.read_tensor.executor&quot;: &quot;Run&quot;,
+    &quot;Python.read_tensors.executor&quot;: &quot;Run&quot;,
+    &quot;Python.scf_stability.executor&quot;: &quot;Run&quot;,
+    &quot;Python.td-dft_spectrum_benzene.executor&quot;: &quot;Run&quot;,
+    &quot;Python.td-dft_spectrum_ethylene.executor&quot;: &quot;Run&quot;,
+    &quot;Python.td-dft_spectrum_water.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
+    &quot;Python.vertical_gaps_Ethylene.executor&quot;: &quot;Run&quot;,
+    &quot;Python.vertical_gaps_Ethylene_CASSCF.executor&quot;: &quot;Run&quot;,
+    &quot;Python.vertical_gaps_Ethylene_CASnevpt2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.vertical_gaps_H2_CASSCF.executor&quot;: &quot;Run&quot;,
+    &quot;Python.vertical_gaps_H2_FCI.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/admin/PycharmProjects/pyQCTools/QSP/Benzene_and_acenes&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/QSP/Benzene_and_acenes" />
+      <recent name="$PROJECT_DIR$/QSP/Ethylene_and_polyenes" />
+      <recent name="$PROJECT_DIR$/QSP" />
       <recent name="$PROJECT_DIR$/DBF" />
       <recent name="$PROJECT_DIR$/tests" />
-      <recent name="$PROJECT_DIR$/QSP/Corr_fcns" />
-      <recent name="$PROJECT_DIR$/QSP/Ethylene_and_polyenes" />
-      <recent name="$PROJECT_DIR$/QSP/Benzene_and_acenes" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/QSP/small_molecules" />
       <recent name="$PROJECT_DIR$/DBF" />
       <recent name="$PROJECT_DIR$/QSP/Benzene_and_acenes" />
       <recent name="$PROJECT_DIR$/QSP/Ethylene_and_polyenes" />
       <recent name="$PROJECT_DIR$/QSP" />
-      <recent name="$PROJECT_DIR$/QSP/Lutein/Ethylene_and_polyenes" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.n2_get_NOs_uhf_full">
-    <configuration name="UHF_natural_orbitals" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.vertical_gaps_H2_FCI">
+    <configuration name="P3_vertical_gaps_CASSCF" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -157,11 +171,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/UHF_natural_orbitals.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P3_vertical_gaps_CASSCF.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -170,7 +184,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="fci_example" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="P4_vertical_gaps_CASSCF" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -179,11 +193,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/fci_example.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P4_vertical_gaps_CASSCF.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -192,7 +206,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="n2_get_NOs_uccsd_frozen" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="P5_vertical_gaps_CASSCF" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -201,11 +215,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DBF" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DBF/n2_get_NOs_uccsd_frozen.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P5_vertical_gaps_CASSCF.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -214,7 +228,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="n2_get_NOs_uccsd_full" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="P6_vertical_gaps_CASSCF" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -223,11 +237,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DBF" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DBF/n2_get_NOs_uccsd_full.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P6_vertical_gaps_CASSCF.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -236,7 +250,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="n2_get_NOs_uhf_full" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="vertical_gaps_H2_FCI" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -245,11 +259,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DBF" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/QSP/small_molecules" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DBF/n2_get_NOs_uhf_full.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QSP/small_molecules/vertical_gaps_H2_FCI.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -260,11 +274,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.n2_get_NOs_uhf_full" />
-        <item itemvalue="Python.n2_get_NOs_uccsd_full" />
-        <item itemvalue="Python.n2_get_NOs_uccsd_frozen" />
-        <item itemvalue="Python.UHF_natural_orbitals" />
-        <item itemvalue="Python.fci_example" />
+        <item itemvalue="Python.vertical_gaps_H2_FCI" />
+        <item itemvalue="Python.P6_vertical_gaps_CASSCF" />
+        <item itemvalue="Python.P5_vertical_gaps_CASSCF" />
+        <item itemvalue="Python.P4_vertical_gaps_CASSCF" />
+        <item itemvalue="Python.P3_vertical_gaps_CASSCF" />
       </list>
     </recent_temporary>
   </component>
@@ -387,7 +401,31 @@
       <option name="project" value="LOCAL" />
       <updated>1773950001638</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Checked functions for UHF integrals">
+      <option name="closed" value="true" />
+      <created>1775483323929</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1775483323929</updated>
+    </task>
+    <task id="LOCAL-00015" summary="H2-RHF dipole integrals revised">
+      <option name="closed" value="true" />
+      <created>1775487688527</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1775487688527</updated>
+    </task>
+    <task id="LOCAL-00016" summary="H2-RHF vertical gaps">
+      <option name="closed" value="true" />
+      <created>1775509335447</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1775509335447</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -402,6 +440,8 @@
     <MESSAGE value="Added new geometries and tests for benzene dipole moment integrals" />
     <MESSAGE value="Acenes and polyenes data and QSPs, and TIPSCI initial preparation file" />
     <MESSAGE value="Checked functions for UHF integrals" />
-    <option name="LAST_COMMIT_MESSAGE" value="Checked functions for UHF integrals" />
+    <MESSAGE value="H2-RHF dipole integrals revised" />
+    <MESSAGE value="H2-RHF vertical gaps" />
+    <option name="LAST_COMMIT_MESSAGE" value="H2-RHF vertical gaps" />
   </component>
 </project>
