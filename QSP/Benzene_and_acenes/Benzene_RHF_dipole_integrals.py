@@ -40,7 +40,7 @@ print(f"Total HF energy: {ehf_val}")
 pi_orbital_space = [17,20,21,22,23,30]
 mc = mcscf.CASSCF(mf, 6, 6)
 C_active = mc.sort_mo(pi_orbital_space)
-
+mf.mo_coeff = C_active #Retrieve ordered orbitals to mf object
 
 #print(mf.mo_coeff[:, 16])
 print(C_active.shape)

@@ -58,39 +58,10 @@ ncas_orbitals = 2
 ncas_electrons = 2
 
 # --- state-averaged CASSCF(2,2) ---
-weights = [1.0 / nstates] * nstates  # equal weights for SA-CASSCF
-mc = mcscf.CASSCF(mf, ncas_orbitals, ncas_electrons)
+mc = mcscf.CASCI(mf, ncas_orbitals, ncas_electrons)
+#mc = mcscf.CASSCF(mf, ncas_orbitals, ncas_electrons)
 mc.sort_mo(pi_orbital_space)
-#mc = mcscf.CASSCF(mf, ncas_orbitals, (ncas_electrons//2, ncas_electrons//2))
-mc = mcscf.state_average_(mc, weights)   # decorate to be state-averaged
 mc.verbose = verbose
-mc.kernel()   # optimize SA orbitals
+mc.fcisolver.nroots = 4
+mc.kernel()
 mc.analyze()
-# Orbitals after SA-CASSCF
-mo_opt = mc.mo_coeff
-
-# --- multi-root CASCI to get individual state energies in the SA orbitals ---
-cas = mcscf.CASCI(mf, ncas_orbitals, ncas_electrons)
-cas.fcisolver.nroots = nstates
-res = cas.casci(mo_opt)   # returns energies (and CI vectors)
-# res may be (energies, ci_vecs, ...) or simply energies depending on version
-if isinstance(res, tuple) or isinstance(res, list):
-    energies = np.asarray(res[0])  # energies in Hartree
-else:
-    energies = np.asarray(res)
-
-# sort (CASCI may not return ordered by energy in all setups)
-order = np.argsort(energies)
-energies = energies[order]
-
-# print energies and vertical gaps
-print("\nState energies (Hartree) and vertical gaps relative to S0:")
-for i, e in enumerate(energies):
-    print(f"  S{i}: {e:.12f}")#   ({e * hartree_to_ev:.6f} eV)")
-
-e0 = energies[0]
-print("\nVertical gaps:")
-for i in range(1, len(energies)):
-    gap_ha = energies[i] - e0
-    gap_ev = gap_ha * hartree_to_ev
-    print(f"  S{i} - S0: {gap_ha:.12f}")# Ha   ({gap_ev:.6f} eV)")

@@ -50,6 +50,7 @@ ncas_electrons = 6
 
 # --- state-averaged CASSCF(2,2) ---
 weights = [1.0 / nstates] * nstates  # equal weights for SA-CASSCF
+mf.verbose = 4
 mc = mcscf.CASSCF(mf, ncas_orbitals, ncas_electrons)
 mc.sort_mo(pi_orbital_space)
 #mc = mcscf.CASSCF(mf, ncas_orbitals, (ncas_electrons//2, ncas_electrons//2))
