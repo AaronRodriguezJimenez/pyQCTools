@@ -57,11 +57,13 @@ pi_orbital_space = [8,9] #pi and pi*
 ncas_orbitals = 2
 ncas_electrons = 2
 
-# --- state-averaged CASSCF(2,2) ---
+# ---CALCULATION STEP
 mc = mcscf.CASCI(mf, ncas_orbitals, ncas_electrons)
+C_active = mc.sort_mo(pi_orbital_space)
+mf.mo_coeff = C_active #Retrieve ordered orbitals to mf object
+mc.mo_coeff = mc.sort_mo(pi_orbital_space)
 #mc = mcscf.CASSCF(mf, ncas_orbitals, ncas_electrons)
-mc.sort_mo(pi_orbital_space)
 mc.verbose = verbose
-mc.fcisolver.nroots = 4
+mc.fcisolver.nroots = 20
 mc.kernel()
 mc.analyze()

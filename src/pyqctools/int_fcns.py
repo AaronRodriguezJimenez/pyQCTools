@@ -278,14 +278,15 @@ def get_unrestricted_active_space_integrals(mol, mc, localized=False, include_al
     Therefore it uses a mc pyscf object.
     :return: H0, H1, H2
     """
-    Ca, Cb = mc.mo_coeff.copy()
-    ncore = int(mc.ncore)
+    Ca = mc.mo_coeff[0].copy()
+    Cb = mc.mo_coeff[1].copy()
+    ncore = mc.ncore
     n_ao = Ca.shape[0]
     nmo = Ca.shape[1]
 
     # determine target active count
     if include_all_noncore:
-        target_ncas = nmo - ncore
+        target_ncas = nmo - ncore[0]
     else:
         target_ncas = int(mc.ncas)
 
@@ -332,23 +333,30 @@ def get_unrestricted_active_space_integrals(mol, mc, localized=False, include_al
 
     # -----------------------
     # 1) One-electron (h1) and core energy: call h1e_for_cas via get_h1eff
-    h1_alpha, h0 = mc.get_h1eff(Ca_final, ncas=target_ncas, ncore=ncore)
-    h1_beta, h0 = mc.get_h1eff(Cb_final, ncas=target_ncas, ncore=ncore)
+    h1eff, h0 = mc.get_h1eff((Ca_final, Cb_final), ncas=target_ncas,ncore=ncore)
+    h1_alpha = h1eff[0]
+    h1_beta = h1eff[1]
 
     # 2) Two-electron: compute using ao2mo.full with the exact MO block we want.
-    start = ncore
-    stop = ncore + target_ncas
-    # MO block for claculation: shape (nao, target_ncas)
-    Ca_final = Ca_final[:, start:stop].copy()
-    Cb_final = Cb_final[:, start:stop].copy()
+    ncore_a, ncore_b = ncore
 
-    h2_aa = ao2mo.kernel(mol, (Ca_final, Ca_final, Ca_final, Ca_final))
+    start_a = ncore_a
+    stop_a = ncore_a + target_ncas
+
+    start_b = ncore_b
+    stop_b = ncore_b + target_ncas
+
+    # MO block for claculation: shape (nao, target_ncas)
+    Ca_act = Ca_final[:, start_a:stop_a].copy()
+    Cb_act = Cb_final[:, start_b:stop_b].copy()
+
+    h2_aa = ao2mo.kernel(mol, (Ca_act, Ca_act, Ca_act, Ca_act))
     h2_aa = ao2mo.restore(1, h2_aa, target_ncas)
 
-    h2_bb = ao2mo.kernel(mol, (Cb_final, Cb_final, Cb_final, Cb_final))
+    h2_bb = ao2mo.kernel(mol, (Cb_act, Cb_act, Cb_act, Cb_act))
     h2_bb = ao2mo.restore(1, h2_bb, target_ncas)
 
-    h2_ab = ao2mo.kernel(mol, (Ca_final, Ca_final, Cb_final, Cb_final))
+    h2_ab = ao2mo.kernel(mol, (Ca_act, Ca_act, Cb_act, Cb_act))
     h2_ab = ao2mo.restore(1, h2_ab, target_ncas)
 
     return h0, h1_alpha, h1_beta, h2_aa, h2_bb, h2_ab
@@ -386,9 +394,14 @@ if __name__ == "__main__":
     # - - - Test active space integrals (restricted)
     from pyscf import mcscf
 
-    mc = mcscf.CASCI(mf, 2, 2)
+    pi_orbital_space = [7,8]
+    mc = mcscf.CASCI(mf, 2, 2) #This is a builder function just to select active orbitals
+    C_active = mc.sort_mo(pi_orbital_space)
+    mf.mo_coeff = C_active  # Retrieve ordered orbitals to mf object
+    mc.mo_coeff = mc.sort_mo(pi_orbital_space)
+
     e_casci, _, _, _, _ = mc.kernel()
-    h0, h1, h2 = get_restricted_active_space_integrals(mol, mc, localized=False)
+    h0, h1, h2 = get_restricted_active_space_integrals(mol, mf, mc, localized=False)
     print(h0)
     print(h1.shape)
     print(h2.shape)
@@ -409,6 +422,11 @@ if __name__ == "__main__":
     print(h2_aa.shape)
 
     # - - - Test active space integrals (unrestricted)
+    pi_orbital_space = [7, 8]
+    mc = mcscf.UCASCI(mf, 2, 2)  # This is a builder used to access to sort_mo function
+    C_active = mc.sort_mo(pi_orbital_space)
+    mf.mo_coeff = C_active  # Retrieve ordered orbitals to mf object
+    mc.mo_coeff = C_active
     h0, h1_alpha, h1_beta, h2aa, h2bb, h2ab = get_unrestricted_active_space_integrals(mol, mc, localized=True)
     print(h0)
     print(h1_alpha.shape)

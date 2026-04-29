@@ -71,6 +71,7 @@ pi_orbital_space = [32,33,34,35,36,37,38,43,47,48]
 mc = mcscf.CASSCF(mf, 10, 10)
 C_active = mc.sort_mo(pi_orbital_space)
 mf.mo_coeff = C_active #Retrieve ordered orbitals to mf object
+mc.mo_coeff = mc.sort_mo(pi_orbital_space)
 
 print(C_active.shape)
 print("target_ncas =", int(mc.ncas))

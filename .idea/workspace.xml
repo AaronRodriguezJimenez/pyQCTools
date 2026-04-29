@@ -4,18 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0f1158e-c416-40ed-9a19-3f1552869634" name="Changes" comment="H2-RHF vertical gaps">
-      <change afterPath="$PROJECT_DIR$/QSP/Benzene_and_acenes/Benzene_vertical_gaps_CASSCF.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P3_vertical_gaps_CASSCF.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P4_vertical_gaps_CASSCF.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P5_vertical_gaps_CASSCF.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P6_vertical_gaps_CASSCF.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QSP/small_molecules/vertical_gaps_H2_FCI.py" afterDir="false" />
+    <list default="true" id="b0f1158e-c416-40ed-9a19-3f1552869634" name="Changes" comment="Added ground-state calculations for polyenes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/vertical_gaps_Ethylene_CASSCF.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P1_vertical_gaps_CASSCF.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QSP/H2_RHF_dipole_moment_integrals.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/small_molecules/H2_RHF_dipole_moment_integrals.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QSP/vertical_gaps_H2_CASSCF.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P2_vertical_gaps_CASSCF.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/H2_singlets_example.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/H2_singlets_example.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/Benzene_and_acenes/Benzene_ground_state_CASSCF.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Benzene_and_acenes/Benzene_ground_state_CASSCF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/Benzene_and_acenes/Benzene_orbitals.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Benzene_and_acenes/Benzene_orbitals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P1_RHF_dipole_moment_integrals.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P1_RHF_dipole_moment_integrals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P1_ground_state_CASSCF.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P1_ground_state_CASSCF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P2_RHF_dipole_moment_integrals.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P2_RHF_dipole_moment_integrals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P2_ground_state_CASSCF.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P2_ground_state_CASSCF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P3_RHF_dipole_moment_integrals.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P3_RHF_dipole_moment_integrals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P3_ground_state_CASSCF.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P3_ground_state_CASSCF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P4_RHF_dipole_moment_integrals.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P4_RHF_dipole_moment_integrals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P4_ground_state_CASSCF.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P4_ground_state_CASSCF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P5_RHF_dipole_moment_integrals.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P5_RHF_dipole_moment_integrals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P5_ground_state_CASSCF.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P5_ground_state_CASSCF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P6_RHF_dipole_moment_integrals.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P6_RHF_dipole_moment_integrals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P6_ground_state_CASSCF.py" beforeDir="false" afterPath="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P6_ground_state_CASSCF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pyqctools/int_fcns.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pyqctools/int_fcns.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,31 +64,42 @@
     &quot;Python tests.Python tests in test_SR_LR.py.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests in test_get_loc_mos.py.executor&quot;: &quot;Run&quot;,
     &quot;Python.Beneze_RHF_dipole_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Benzene_RHF_dipole_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Benzene_dipoleZ_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Benzene_ground_state_CASSCF.executor&quot;: &quot;Run&quot;,
     &quot;Python.Benzene_orbitals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Benzene_vertical_gaps_CASSCF.executor&quot;: &quot;Run&quot;,
     &quot;Python.C2H4_RHF_dipole_moment_integrals.executor&quot;: &quot;Run&quot;,
     &quot;Python.CASSCF_example.executor&quot;: &quot;Run&quot;,
     &quot;Python.Fe_slab.executor&quot;: &quot;Run&quot;,
     &quot;Python.H2_RHF_dipole_moment_integrals.executor&quot;: &quot;Run&quot;,
     &quot;Python.H2_singlets_example.executor&quot;: &quot;Run&quot;,
+    &quot;Python.HChain_integrals.executor&quot;: &quot;Run&quot;,
     &quot;Python.He_8_ints_tipsci_example (1).executor&quot;: &quot;Run&quot;,
     &quot;Python.He_8_ints_tipsci_example.executor&quot;: &quot;Run&quot;,
     &quot;Python.Naphthalene_orbitals.executor&quot;: &quot;Run&quot;,
     &quot;Python.P1_RHF_dipole_moment_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P1_ground_state_CASSCF.executor&quot;: &quot;Run&quot;,
     &quot;Python.P1_orbitals.executor&quot;: &quot;Run&quot;,
     &quot;Python.P1_vertical_gaps_CASSCF.executor&quot;: &quot;Run&quot;,
     &quot;Python.P2_RHF_dipole_moment_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P2_ground_state_CASSCF.executor&quot;: &quot;Run&quot;,
     &quot;Python.P2_orbtials.executor&quot;: &quot;Run&quot;,
     &quot;Python.P2_vertical_gaps_CASSCF.executor&quot;: &quot;Run&quot;,
     &quot;Python.P3_RHF_dipole_moment_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P3_ground_state_CASSCF.executor&quot;: &quot;Run&quot;,
     &quot;Python.P3_orbtials.executor&quot;: &quot;Run&quot;,
     &quot;Python.P3_vertical_gaps_CASSCF.executor&quot;: &quot;Run&quot;,
     &quot;Python.P4_RHF_dipole_moment_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P4_ground_state_CASSCF.executor&quot;: &quot;Run&quot;,
     &quot;Python.P4_orbtials.executor&quot;: &quot;Run&quot;,
     &quot;Python.P4_vertical_gaps_CASSCF.executor&quot;: &quot;Run&quot;,
     &quot;Python.P5_RHF_dipole_moment_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P5_ground_state_CASSCF.executor&quot;: &quot;Run&quot;,
     &quot;Python.P5_orbtials.executor&quot;: &quot;Run&quot;,
     &quot;Python.P5_vertical_gaps_CASSCF.executor&quot;: &quot;Run&quot;,
     &quot;Python.P6_RHF_dipole_moment_integrals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.P6_ground_state_CASSCF.executor&quot;: &quot;Run&quot;,
     &quot;Python.P6_orbtials.executor&quot;: &quot;Run&quot;,
     &quot;Python.P6_vertical_gaps_CASSCF.executor&quot;: &quot;Run&quot;,
     &quot;Python.RHF_dipole_moment_integrals.executor&quot;: &quot;Run&quot;,
@@ -137,32 +153,57 @@
     &quot;Python.vertical_gaps_Ethylene_CASnevpt2.executor&quot;: &quot;Run&quot;,
     &quot;Python.vertical_gaps_H2_CASSCF.executor&quot;: &quot;Run&quot;,
     &quot;Python.vertical_gaps_H2_FCI.executor&quot;: &quot;Run&quot;,
+    &quot;Python.vertical_gaps_H4_FCI.executor&quot;: &quot;Run&quot;,
+    &quot;Python.vertical_gaps_H6_FCI.executor&quot;: &quot;Run&quot;,
+    &quot;Python.vertical_gaps_HChain_FCI.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/admin/PycharmProjects/pyQCTools/QSP/Benzene_and_acenes&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/admin/PycharmProjects/pyQCTools/QSP/Ethylene_and_polyenes&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/QSP/Benzene_and_acenes" />
       <recent name="$PROJECT_DIR$/QSP/Ethylene_and_polyenes" />
+      <recent name="$PROJECT_DIR$/QSP/small_molecules" />
+      <recent name="$PROJECT_DIR$/QSP/Benzene_and_acenes" />
       <recent name="$PROJECT_DIR$/QSP" />
       <recent name="$PROJECT_DIR$/DBF" />
-      <recent name="$PROJECT_DIR$/tests" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/QSP/small_molecules" />
+      <recent name="$PROJECT_DIR$/QSP" />
       <recent name="$PROJECT_DIR$/DBF" />
       <recent name="$PROJECT_DIR$/QSP/Benzene_and_acenes" />
       <recent name="$PROJECT_DIR$/QSP/Ethylene_and_polyenes" />
-      <recent name="$PROJECT_DIR$/QSP" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.vertical_gaps_H2_FCI">
-    <configuration name="P3_vertical_gaps_CASSCF" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.int_fcns">
+    <configuration name="Benzene_ground_state_CASSCF" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pyQCTools" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/QSP/Benzene_and_acenes" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QSP/Benzene_and_acenes/Benzene_ground_state_CASSCF.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="P1_ground_state_CASSCF" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -175,7 +216,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P3_vertical_gaps_CASSCF.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P1_ground_state_CASSCF.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -184,7 +225,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="P4_vertical_gaps_CASSCF" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="P2_ground_state_CASSCF" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -197,7 +238,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P4_vertical_gaps_CASSCF.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P2_ground_state_CASSCF.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -206,7 +247,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="P5_vertical_gaps_CASSCF" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="P3_ground_state_CASSCF" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -219,7 +260,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P5_vertical_gaps_CASSCF.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P3_ground_state_CASSCF.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -228,7 +269,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="P6_vertical_gaps_CASSCF" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="int_fcns" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyQCTools" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -237,33 +278,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/pyqctools" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QSP/Ethylene_and_polyenes/P6_vertical_gaps_CASSCF.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="vertical_gaps_H2_FCI" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="pyQCTools" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/QSP/small_molecules" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/QSP/small_molecules/vertical_gaps_H2_FCI.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/pyqctools/int_fcns.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -274,11 +293,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.vertical_gaps_H2_FCI" />
-        <item itemvalue="Python.P6_vertical_gaps_CASSCF" />
-        <item itemvalue="Python.P5_vertical_gaps_CASSCF" />
-        <item itemvalue="Python.P4_vertical_gaps_CASSCF" />
-        <item itemvalue="Python.P3_vertical_gaps_CASSCF" />
+        <item itemvalue="Python.int_fcns" />
+        <item itemvalue="Python.Benzene_ground_state_CASSCF" />
+        <item itemvalue="Python.P1_ground_state_CASSCF" />
+        <item itemvalue="Python.P2_ground_state_CASSCF" />
+        <item itemvalue="Python.P3_ground_state_CASSCF" />
       </list>
     </recent_temporary>
   </component>
@@ -425,7 +444,23 @@
       <option name="project" value="LOCAL" />
       <updated>1775509335447</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Added Polyenes CASSCF vertical gaps">
+      <option name="closed" value="true" />
+      <created>1775671143378</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1775671143378</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Added ground-state calculations for polyenes">
+      <option name="closed" value="true" />
+      <created>1776809420176</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1776809420176</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -442,6 +477,8 @@
     <MESSAGE value="Checked functions for UHF integrals" />
     <MESSAGE value="H2-RHF dipole integrals revised" />
     <MESSAGE value="H2-RHF vertical gaps" />
-    <option name="LAST_COMMIT_MESSAGE" value="H2-RHF vertical gaps" />
+    <MESSAGE value="Added Polyenes CASSCF vertical gaps" />
+    <MESSAGE value="Added ground-state calculations for polyenes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added ground-state calculations for polyenes" />
   </component>
 </project>

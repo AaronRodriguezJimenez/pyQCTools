@@ -74,9 +74,13 @@ pi_orbital_space = [38,39,40,41,42,43,44,45,47,54,57,58]
 ncas_orbitals = 12
 ncas_electrons = 12
 
+# ---CALCULATION STEP
 mc = mcscf.CASCI(mf, ncas_orbitals, ncas_electrons)
+C_active = mc.sort_mo(pi_orbital_space)
+mf.mo_coeff = C_active #Retrieve ordered orbitals to mf object
+mc.mo_coeff = mc.sort_mo(pi_orbital_space)
 #mc = mcscf.CASSCF(mf, ncas_orbitals, ncas_electrons)
-mc.sort_mo(pi_orbital_space)
 mc.verbose = verbose
-mc.kernel()   # optimize SA orbitals
+mc.fcisolver.nroots = 4
+mc.kernel()
 mc.analyze()
