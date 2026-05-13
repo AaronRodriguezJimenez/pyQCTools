@@ -301,12 +301,15 @@ def main(dir_name='./'):
     print("   H = J * Sa * Sb")
     print("     or")
     print("   H = -2J' * Sa * Sb")
+    Jij_matrix = np.zeros((nstates, nstates), dtype=float)
     for i in range(nstates):
         for j in range(i+1, nstates):
             Si = blocks[i] / 2.0
             Sj = blocks[j] / 2.0
             J = Heff_final[i, j] / np.sqrt(Si * Sj)
             print(f" J({i+1:2d},{j+1:2d}) = {J*convert:20.6f} : J'({i+1:2d},{j+1:2d}) = {J*(-0.5)*convert:20.6f} ({units})")
+            Jij_matrix[i, j] = J * convert
+            Jij_matrix[j, i] = J * convert
 
     # Norms: un-orthogonalize and print norms
     c_un = c_orth @ X2inv
@@ -314,10 +317,180 @@ def main(dir_name='./'):
     for i in range(nstates):
         print(f"  Vector {i+1:4d}: {np.linalg.norm(c_un[:, i]):8.4f}")
 
+    return Jij_matrix, Heff_final
+
 if __name__ == '__main__':
     # allow passing directory as argv
     if len(sys.argv) > 1:
         d = sys.argv[1]
     else:
         d = './ni_cubane_data_sfcas'
-    main(d)
+
+    # Returns
+    # The effective Hamiltonian and the final Effective Hamiltonian in local ground state basis
+    Jmat, Heff = main(d)
+
+    print("J Matrix")
+    print(Jmat)
+
+    #
+    # Save Hamiltonian matrix to compressed NPZ
+    #
+    data_name = "ni_cubane_excoups.npz"
+    np.savez(
+        f"{data_name}",
+        Jmatrix= Jmat,
+        Heff=Heff,
+    )
+
+    print(f"Saved Hamiltonian to {data_name}")
+
+    # Fnal matrix H_eff, contains the exchange coupling localized spins
+    #  H = sum_{i<j} J_ij S_i * S_j
+    # with J = Heff_final[i, j] / np.sqrt(Si * Sj)
+    # For spin 1/2 systems S_i * S_j = 1/4 * (XiXj + YiYj + ZiZj)
+    # Mapping to Qiskit representation:
+    import numpy as np
+    from qiskit.quantum_info import SparsePauliOp
+
+
+    def effective_to_qiskit_hamiltonian(finalHeff,
+                                        spin=0.5,
+                                        include_diagonal=False,
+                                        atol=1e-12):
+        """
+        Convert an effective Heisenberg Hamiltonian matrix into
+        a Qiskit SparsePauliOp.
+
+        Parameters
+        ----------
+        finalHeff : ndarray (N,N)
+            Effective Hamiltonian matrix from your SF-CIS workflow.
+
+        spin : float
+            Local spin value.
+            For spin-1/2 use 0.5.
+
+        include_diagonal : bool
+            If True, include diagonal onsite energies as Z terms.
+            Usually False for pure Heisenberg models.
+
+        atol : float
+            Numerical threshold.
+
+        Returns
+        -------
+        Hq : SparsePauliOp
+            Qiskit Hamiltonian operator.
+
+        Jij_matrix : ndarray
+            Extracted exchange coupling matrix.
+        """
+
+        finalHeff = np.array(finalHeff, dtype=float)
+
+        nsites = finalHeff.shape[0]
+
+        paulis = []
+        coeffs = []
+
+        Jij_matrix = np.zeros_like(finalHeff)
+
+        #
+        # Heisenberg interaction:
+        #
+        # H = Σ Jij Si·Sj
+        #
+        # For spin-1/2:
+        #
+        # Si·Sj = 1/4 (XiXj + YiYj + ZiZj)
+        #
+
+        for i in range(nsites):
+
+            for j in range(i + 1, nsites):
+
+                Jij = finalHeff[i, j] / spin
+
+                Jij_matrix[i, j] = Jij
+                Jij_matrix[j, i] = Jij
+
+                if abs(Jij) < atol:
+                    continue
+
+                for pauli in ["X", "Y", "Z"]:
+                    label = ["I"] * nsites
+
+                    label[i] = pauli
+                    label[j] = pauli
+
+                    paulis.append("".join(label))
+
+                    #
+                    # spin-1/2 normalization
+                    #
+                    coeffs.append(Jij / 4.0)
+
+        #
+        # Optional diagonal terms
+        #
+        # These are NOT part of a pure Heisenberg model,
+        # but can be included as local fields if desired.
+        #
+
+        if include_diagonal:
+
+            for i in range(nsites):
+
+                hii = finalHeff[i, i]
+
+                if abs(hii) < atol:
+                    continue
+
+                label = ["I"] * nsites
+                label[i] = "Z"
+
+                paulis.append("".join(label))
+                coeffs.append(hii)
+
+        Hq = SparsePauliOp(paulis, coeffs)
+
+        return Hq.simplify(), Jij_matrix
+
+
+    #Hq, Jij = effective_to_qiskit_hamiltonian(finalHeff)
+    Hq, Jij = effective_to_qiskit_hamiltonian(Heff)
+
+    print("Exchange couplings:")
+    print(Jij)
+
+    print("\nQiskit Hamiltonian:")
+    print(Hq)
+
+    #Circuit time evolution construction e^(-iHt)
+    from qiskit.circuit.library import PauliEvolutionGate
+    from qiskit import QuantumCircuit
+
+    time = 1.0
+    evolution_gate = PauliEvolutionGate(Hq, time=time)
+    qc = QuantumCircuit(Hq.num_qubits)
+    qc.append(evolution_gate, range(Hq.num_qubits))
+    print(qc.decompose())
+
+    #- - - Save Paulis and Coefficients for Julia
+    #
+    # Extract Pauli strings
+    #
+    paulis = Hq.paulis.to_labels()
+    print(paulis)
+    print(type(paulis[0]))
+
+    #
+    # Extract coefficients
+    #
+    coeffs = np.array(Hq.coeffs, dtype=np.complex128)
+    print(coeffs)
+
+
+
+
