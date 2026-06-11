@@ -1,7 +1,7 @@
 """
   In this example, we illustrate how to get Active NOS
   CREATES: SPINORBITALS in chemist notation from RHF
-  """
+"""
 
 import numpy as np
 from pyscf import gto

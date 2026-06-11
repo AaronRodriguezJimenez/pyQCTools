@@ -177,7 +177,7 @@ def get_restricted_active_space_integrals(mol, mf, mc, localized=False, include_
     """
     Compute molecular integrals for a selected active space from a restricted SCF
     case. Extract effective active-space Hamiltonian for either:
-      - the CASSCF-defined active space (mc.ncas), or
+      - the CAS-defined active space (mc.ncas), or
       - a different selected non-core block (all non-core orbitals if include_all_noncore=True).
 
     Therefore it uses a mc pyscf object.
@@ -361,8 +361,119 @@ def get_unrestricted_active_space_integrals(mol, mc, localized=False, include_al
 
     return h0, h1_alpha, h1_beta, h2_aa, h2_bb, h2_ab
 
+def get_restricted_NO_integrals(mol, mf, mc, natorbs, localized=False, include_all_noncore=False):
+    """
+    Compute molecular integrals for a selected NATURAL ORBITAL active space from a restricted SCF
+    case. Extract effective active-space Hamiltonian for either:
+      - the CAS-defined active space (mc.ncas), or
+      - a different selected non-core block (all non-core orbitals if include_all_noncore=True).
+
+    INPUTS:
+    natorbs need to have been pre-computed natural orbitals (e.g. from ccsd)
+    mf a mean-field object (RHF)
+    mc a CASCI object made from the mf, this is just a placeholder for data
+    Therefore it uses a mc pyscf object.
+    :return: H0, H1, H2
+    """
+    C = mc.mo_coeff.copy() #mean-field integrals
+    U = natorbs #Natural orbitals coeffs
+    ncore = int(mc.ncore)
+    nmo = C.shape[1]
+
+    # determine target active count
+    if include_all_noncore:
+        target_ncas = nmo - ncore
+    else:
+        target_ncas = int(mc.ncas)
+
+    if target_ncas <= 0:
+        raise ValueError("target_ncas must be > 0")
 
     # -----------------------
+    # 1) One-electron (h1) and core energy: call h1e_for_cas via get_h1eff
+    h1_spatial, h0 = mc.get_h1eff(C, ncas=target_ncas, ncore=ncore)
+
+    # -----------------------
+    # 2) Two-electron: compute using ao2mo.full with the exact MO block we want.
+    start = ncore
+    stop = ncore + target_ncas
+    # MO block for claculation: shape (nao, target_ncas)
+    mo_for_mol = C[:, start:stop].copy()
+
+    # Warning: building a full (n,n,n,n) tensor scales as n^4 memory.
+    # For n=26, that's ~26^4 ~ 456,976 elements (float64 ~ 3.7 MB) — actually fine,
+    # but for larger n this quickly explodes. Still, ao2mo.full may use intermediate memory.
+    try:
+        # If underlying SCF has precomputed eri available (faster), use it
+        if hasattr(mc._scf, "_eri") and getattr(mc._scf, "_eri", None) is not None:
+            eri = ao2mo.full(mc._scf._eri, mo_for_mol, max_memory=mc.max_memory)
+        else:
+            eri = ao2mo.full(mc.mol, mo_for_mol, verbose=mc.verbose, max_memory=mc.max_memory)
+    except Exception as e:
+        raise RuntimeError("Failed to build two-electron integrals with ao2mo.full: " + str(e)) from e
+
+    # ao2mo.full returns chemists' (ij|kl) ordering as a 4-index array (n,n,n,n).
+    # Convert to physicists' (pq|rs) ordering used by OpenFermion: (i,j,k,l) -> transpose(0,2,3,1)
+    eri = np.asarray(eri)
+    if eri.ndim != 4 or eri.shape != (target_ncas,) * 4:
+        # If ao2mo returned a packed/flattened format for some reason, try to handle it robustly:
+        if eri.ndim == 1:
+            n_guess = int(round(eri.size ** 0.25))
+            if n_guess ** 4 == eri.size:
+                eri = eri.reshape((n_guess,) * 4)
+            else:
+                raise RuntimeError(f"Unexpected ao2mo.full output shape {eri.shape} (size {eri.size})")
+        elif eri.ndim == 2:
+            # some variants might return m x m where m=n*(n+1)/2  (packed). Unpack:
+            m = eri.shape[0]
+            n_guess = int(round((np.sqrt(1 + 8 * m) - 1) / 2))
+            if n_guess * (n_guess + 1) // 2 == m:
+                eri = ao2mo.restore(1, eri, n_guess)
+            else:
+                raise RuntimeError(f"Unexpected 2D ao2mo.full output shape {eri.shape}")
+        else:
+            raise RuntimeError(f"Unexpected ao2mo.full output ndim={eri.ndim}, shape={eri.shape}")
+
+    # 3. Transform integrals to NO basis
+    print("Rotating integrals to Natural Orbital basis...")
+    h1_no = U.T @ h1_spatial @ U
+
+    g_no = ao2mo.incore.full(eri, U, compact=False)
+    g_no = g_no.reshape(target_ncas, target_ncas, target_ncas, target_ncas)
+
+    # 1. Handle Localization for NOs if requested
+    if localized:
+        from pyscf import lo
+        nocc = int((mf.mo_occ > 0).sum())
+        occ_idx_act = np.arange(0, nocc)
+        vir_idx_act = np.arange(nocc, len(U))
+        # Split MOs into occupied / virtual subsets
+        U_act_occ = U[:, occ_idx_act]
+        U_act_vir = U[:, vir_idx_act]
+
+        # Boys localization
+        loc_occ = lo.Boys(mol, U_act_occ).kernel(verbose=4)
+        loc_vir = lo.Boys(mol, U_act_vir).kernel(verbose=4)
+
+        U_loc = np.column_stack((loc_occ, loc_vir))
+
+        # Build the unitary rotation L in the NO basis
+        # C_loc_no = C_no_ao @ L  =>  L = C_no_ao^T S C_loc_no
+        S = mol.intor("int1e_ovlp")
+        L = U.T @ S @ U_loc
+
+        # Rotate 1- and 2-electron integrals from NO to localized-NO basis
+        h1_no = L.T @ h1_no @ L
+
+        # g_no is (pq|rs) in NO basis; rotate all four indices with L
+        # Use ao2mo.incore.full with an explicit ERI tensor to avoid huge temp files
+        eri_no = ao2mo.restore(1, g_no.reshape(target_ncas ** 2, target_ncas ** 2), target_ncas)  # 4-index (n_act,n_act,n_act,n_act)
+        g_loc_1d = ao2mo.incore.full(eri_no, L, compact=False)
+        g_no = g_loc_1d.reshape(target_ncas, target_ncas, target_ncas, target_ncas)
+
+
+    return h0, h1_no, g_no
+# -----------------------
 
 if __name__ == "__main__":
     from pyscf import gto, scf
