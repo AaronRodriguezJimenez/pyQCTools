@@ -12,6 +12,7 @@ from src.pyqctools.int_fcns import get_restricted_active_space_integrals
 import matplotlib.pyplot as plt
 import pandas as pd
 from pyscf.lib.exceptions import LinearDependencyError
+from correlation_diagnostics import collect_fci_strong_correlation_diagnostics
 
 n = 4
 d = 0.7414  # fixed H-H distance inside each H2 fragment, Angstrom
@@ -198,6 +199,7 @@ def compute_fci_energy(
     basis="sto-3g",
     stability_cycles=10,
     break_uhf_symmetry=True,
+    return_fci_data=False,
 ):
     atom = make_H4_lin_diss_geometry(r_frag)
 
@@ -243,7 +245,13 @@ def compute_fci_energy(
     # -------------------------
     cisolver = fci.FCI(mf)
     cisolver.nroots = 1
-    efci = cisolver.kernel()[0]
+    efci, fcivec = cisolver.kernel()
+
+    fci_data = {
+        "fcivec": fcivec,
+        "norb": mf.mo_coeff.shape[1],
+        "nelec": mf.mol.nelectron,
+    }
 
     # -------------------------
     # UHF
@@ -309,6 +317,9 @@ def compute_fci_energy(
         "uhf_stability_error": uhf_final_stab["error"] or uhf_stab_error,
     }
 
+    if return_fci_data:
+        return mf, umf, efci, row, fci_data
+
     return mf, umf, efci, row
 
 def plot_energies(results, savepath=None, show=True):
@@ -333,9 +344,9 @@ def plot_energies(results, savepath=None, show=True):
     plt.plot(r_values, hf_energies, marker="o", label="RHF")
     plt.plot(r_values, uhf_energies, marker="x", label="UHF")
     plt.plot(r_values, fci_energies, marker="o", label="FCI")
-    plt.xlabel("H2-H2 separation R / Angstrom")
+    plt.xlabel("R / Angstrom")
     plt.ylabel("RHF energy / Hartree")
-    plt.title("H4 as H2-H2 Fragment Separation")
+    plt.title("H4-LIN4 Model")
     plt.grid(True, alpha=0.3)
     plt.legend()
     plt.tight_layout()
@@ -373,42 +384,70 @@ results = {}
 rows = []
 
 for r_frag in r_fragment_values:
-    mf, umf, efci, row = compute_fci_energy(
+    mf, umf, efci, row, fci_data = compute_fci_energy(
         r_frag=r_frag,
         basis="sto-3g",
         stability_cycles=10,
         break_uhf_symmetry=True,
+        return_fci_data=True,
     )
 
     results[r_frag] = {
         "ehf": row["e_rhf"],
-        "efci": row["e_fci"],
+        "efci": efci,
         "euhf": row["e_uhf"],
     }
 
-    rows.append(row)
+    diag = collect_fci_strong_correlation_diagnostics(
+        fcivec=fci_data["fcivec"],
+        norb=fci_data["norb"],
+        nelec=fci_data["nelec"],
+        e_fci=efci,
+        e_rhf=row["e_rhf"],
+        e_uhf=row["e_uhf"],
+        umf=umf,
+        prefix="fci",
+    )
 
-stability_df = pd.DataFrame(rows)
+    full_row = {}
+    full_row.update(row)
+    full_row.update(diag)
+    rows.append(full_row)
 
-table_cols = [
+# stability_df = pd.DataFrame(rows)
+diagnostics_df = pd.DataFrame(rows)
+
+diagnostic_cols = [
     "R",
     "e_rhf",
     "e_uhf",
     "e_fci",
-    "rhf_internal_status",
-    "rhf_external_status",
-    "uhf_internal_status",
-    "uhf_external_status",
+    "abs_e_corr_rhf",
+    "abs_e_corr_uhf",
     "uhf_s2",
-    "rhf_stability_cycles",
-    "uhf_stability_cycles",
+    "fci_n_unpaired",
+    "fci_n_unpaired_per_electron",
+    "fci_hono",
+    "fci_luno",
+    "fci_hono_luno_gap",
+    "fci_no_entropy",
+    "fci_active_fractional_orbitals",
+    "fci_radical_like_orbitals",
+    "fci_ci_reference_weight",
+    "fci_ci_multiconfig_index",
+    "fci_ci_dominant_weight",
+    "fci_ci_entropy",
+    "fci_ci_neff",
+    "fci_natural_occupations",
 ]
 
-print("\nSCF stability summary")
-print(stability_df[table_cols].to_string(index=False))
+print("\nStrong-correlation diagnostic summary")
+print(diagnostics_df[diagnostic_cols].to_string(index=False))
 
-stability_df.to_csv(outdir / "h4_LIN4_stability_table.csv", index=False)
-print(f"\nStability table saved to {outdir / 'h4_LIN4_stability_table.csv'}")
+diagnostics_path = outdir / "h4_LIN4_strong_correlation_diagnostics.csv"
+diagnostics_df.to_csv(diagnostics_path, index=False)
+
+print(f"\nDiagnostics table saved to {diagnostics_path}")
 
 r_values, hf_energies = plot_energies(
     results,

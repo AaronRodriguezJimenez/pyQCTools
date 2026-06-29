@@ -239,7 +239,7 @@ def get_uccsd_natural_orbitals(mycc, mf, debug=True):
         dm_mo = 0.5 * (dm_mo + dm_mo.conj().T)
 
         occ_vals, vecs = np.linalg.eigh(dm_mo)
-
+        #Reorder orbitals descending
         idx = occ_vals.argsort()[::-1]
         occ_vals = occ_vals[idx]
         vecs = vecs[:, idx]
