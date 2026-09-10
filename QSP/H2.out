@@ -1,0 +1,261 @@
+#INFO: **** input file is /home/aaron/PycharmProjects/pyQCTools/QSP/vertical_gaps_H2_CASSCF.py ****
+# save as ethylene_casscf_vertical_gaps.py
+from pyscf import gto, scf, mcscf
+from pyscf.lib import logger
+from pyqctools.geometries import H2
+import numpy as np
+
+# --- user parameters ---
+nstates = 4            # number of lowest singlet states to compute (S0..S(nstates-1))
+hartree_to_ev = 27.211386245988  # conversion factor
+
+mol = gto.Mole()
+mol.atom = H2()
+mol.basis = "sto-3g"
+#mol.symmetry = True
+mol.verbose = 4
+mol.output = "./H2.out"
+mol.build()
+
+# --- mean-field ---
+mf = scf.RHF(mol)
+mf.kernel()
+
+#Before anything check stability:
+def stable_opt_internal(mf, stability_cycles):
+    log = logger.new_logger(mf)
+    mo1, _, stable, _ = mf.stability(return_status=True)
+    cyc = 0
+    print("STABLE?", stable)
+    while (not stable and cyc < stability_cycles):
+        log.note('Try to optimize orbitals until stable, attempt %d' % cyc)
+        dm1 = mf.make_rdm1(mo1, mf.mo_occ)
+        mf = mf.run(dm1)
+        mo1, _, stable, _ = mf.stability(return_status=True)
+        cyc += 1
+    if not stable:
+        log.note('Stability Opt failed after %d attempts' % cyc)
+    return mf
+
+
+stability_cycles = 10
+mf = stable_opt_internal(mf, stability_cycles)
+
+# --- state-averaged CASSCF(2,2) ---
+ncas_orbitals = 2
+ncas_electrons = 2     # CAS(2,2) for H2 (2 electrons in 2 orbitals)
+weights = [1.0 / nstates] * nstates  # equal weights for SA-CASSCF
+
+mc = mcscf.CASSCF(mf, ncas_orbitals, (ncas_electrons//2, ncas_electrons//2))
+mc = mcscf.state_average_(mc, weights)   # decorate to be state-averaged
+mc.verbose = 4
+mc.kernel()   # optimize SA orbitals
+mc.analyze()
+# Orbitals after SA-CASSCF
+mo_opt = mc.mo_coeff
+
+# --- multi-root CASCI to get individual state energies in the SA orbitals ---
+cas = mcscf.CASCI(mf, ncas_orbitals, ncas_electrons)
+cas.fcisolver.nroots = nstates
+res = cas.casci(mo_opt)   # returns energies (and CI vectors)
+# res may be (energies, ci_vecs, ...) or simply energies depending on version
+if isinstance(res, tuple) or isinstance(res, list):
+    energies = np.asarray(res[0])  # energies in Hartree
+else:
+    energies = np.asarray(res)
+
+# sort (CASCI may not return ordered by energy in all setups)
+order = np.argsort(energies)
+energies = energies[order]
+
+# print energies and vertical gaps
+print("\nState energies (Hartree) and vertical gaps relative to S0:")
+for i, e in enumerate(energies):
+    print(f"  S{i}: {e:.12f} Ha   ({e * hartree_to_ev:.6f} eV)")
+
+e0 = energies[0]
+print("\nVertical gaps:")
+for i in range(1, len(energies)):
+    gap_ha = energies[i] - e0
+    gap_ev = gap_ha * hartree_to_ev
+    print(f"  S{i} - S0: {gap_ha:.12f} Ha   ({gap_ev:.6f} eV)")#INFO: ******************** input file end ********************
+
+
+System: uname_result(system='Linux', node='Aristotle', release='6.8.0-106-generic', version='#106~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar  6 08:44:59 UTC ', machine='x86_64')  Threads 16
+Python 3.10.12 (main, Mar  3 2026, 11:56:32) [GCC 11.4.0]
+numpy 2.2.6  scipy 1.15.3  h5py 3.15.1
+Date: Mon Apr  6 22:07:25 2026
+PySCF version 2.12.0
+PySCF path  /home/aaron/VCS_projects/py4julia/lib/python3.10/site-packages/pyscf
+
+[CONFIG] conf_file None
+[INPUT] verbose = 4
+[INPUT] num. atoms = 2
+[INPUT] num. electrons = 2
+[INPUT] charge = 0
+[INPUT] spin (= nelec alpha-beta = 2S) = 0
+[INPUT] symmetry False subgroup None
+[INPUT] Mole.unit = angstrom
+[INPUT] Symbol           X                Y                Z      unit          X                Y                Z       unit  Magmom
+[INPUT]  1 H      0.000000000000   0.000000000000   0.000000000000 AA    0.000000000000   0.000000000000   0.000000000000 Bohr   0.0
+[INPUT]  2 H      0.000000000000   0.000000000000   0.741400000000 AA    0.000000000000   0.000000000000   1.401042948753 Bohr   0.0
+
+nuclear repulsion = 0.713753993687618
+number of shells = 2
+number of NR pGTOs = 6
+number of NR cGTOs = 2
+basis = sto-3g
+ecp = {}
+CPU time:         4.51
+
+
+******** <class 'pyscf.scf.hf.RHF'> ********
+method = RHF
+initial guess = minao
+damping factor = 0
+level_shift factor = 0
+DIIS = <class 'pyscf.scf.diis.CDIIS'>
+diis_start_cycle = 1
+diis_space = 8
+diis_damp = 0
+SCF conv_tol = 1e-09
+SCF conv_tol_grad = None
+SCF max_cycles = 50
+direct_scf = True
+direct_scf_tol = 1e-13
+chkfile to save SCF result = /tmp/tmp5y_e4b9v
+max_memory 4000 MB (current use 232 MB)
+Set gradient conv threshold to 3.16228e-05
+Initial guess from minao.
+init E= -0.769721073833391
+  HOMO = -0.519649757962424  LUMO = 0.59229862943522
+cycle= 1 E= -1.11668438708534  delta_E= -0.347  |g|= 4.79e-16  |ddm|= 0.849
+  HOMO = -0.577974807208061  LUMO = 0.669698669414676
+cycle= 2 E= -1.11668438708534  delta_E= -4.44e-16  |g|= 3.74e-16  |ddm|= 7.28e-16
+  HOMO = -0.57797480720806  LUMO = 0.669698669414676
+Extra cycle  E= -1.11668438708534  delta_E= 4.44e-16  |g|= 4.79e-16  |ddm|= 7.28e-16
+converged SCF energy = -1.11668438708534
+rhf_internal: lowest eigs of H = [4.51228722]
+<class 'pyscf.scf.hf.RHF'> wavefunction is stable in the internal stability analysis
+
+******** <class 'pyscf.mcscf.addons.StateAverageCASSCF'> ********
+CAS (1e+1e, 2o), ncore = 0, nvir = 0
+max_cycle_macro = 50
+max_cycle_micro = 4
+conv_tol = 1e-07
+conv_tol_grad = None
+orbital rotation max_stepsize = 0.02
+orbital rotation threshold for CI restart = 0.01
+augmented hessian ah_max_cycle = 30
+augmented hessian ah_conv_tol = 1e-12
+augmented hessian ah_linear dependence = 1e-14
+augmented hessian ah_level shift = 1e-08
+augmented hessian ah_start_tol = 2.5
+augmented hessian ah_start_cycle = 3
+augmented hessian ah_grad_trust_region = 3
+kf_trust_region = 3
+kf_interval = 4
+ci_response_space = 4
+ci_grad_trust_region = 3
+with_dep4 0
+natorb = False
+canonicalization = True
+sorting_mo_energy = False
+ao2mo_level = 2
+chkfile = /tmp/tmp5y_e4b9v
+max_memory 4000 MB (current use 248 MB)
+internal_rotation = False
+******** <class 'pyscf.mcscf.addons.StateAverageFCISolver'> ********
+max. cycles = 50
+conv_tol = 1e-08
+davidson only = False
+linear dependence = 1e-12
+level shift = 0.001
+max iter space = 12
+max_memory 4000 MB
+nroots = 4
+pspace_size = 400
+spin = None
+State-average over 4 states with weights [0.25, 0.25, 0.25, 0.25]
+CASCI E = -0.339953613441494  S^2 = 0.5000000
+Set conv_tol_grad to 0.000316228
+macro iter   1 (  1 JK    1 micro), CASSCF E = -0.339953613441494  dE =  5.55111512e-16  S^2 = 0.5000000
+               |grad[o]|=    0  |ddm|=1.2e-16  |maxRot[o]|=    0
+1-step CASSCF converged in   1 macro (  1 JK   1 micro) steps
+CASSCF canonicalization
+Density matrix diagonal elements [1. 1.]
+CASSCF energy = -0.339953613441494
+CASCI E = -0.339953613441494  E(CI) = -1.05370760712911  S^2 = 0.5000000
+CASCI state-averaged energy = -0.339953613441494
+CASCI energy for each state
+  State 0 weight 0.25  E = -1.1372701746609 S^2 = 0.0000000
+  State 1 weight 0.25  E = -0.532479006886172 S^2 = 2.0000000
+  State 2 weight 0.25  E = -0.16990139046318 S^2 = 0.0000000
+  State 3 weight 0.25  E = 0.479836118244279 S^2 = 0.0000000
+Natural occ [1. 1.]
+Natural orbital (expansion on meta-Lowdin AOs) in CAS space
+               #1        #2       
+0 H 1s          -0.00000   1.00000
+1 H 1s           1.00000   0.00000
+<mo_coeff-mcscf|mo_coeff-hf>  1      1        1.00000000
+<mo_coeff-mcscf|mo_coeff-hf>  2      2        1.00000000
+** Largest CI components **
+  [alpha occ-orbitals] [beta occ-orbitals]  state 0   CI coefficient
+  [0]                  [0]                             0.993614605805
+  [1]                  [1]                            -0.112827368710
+  [alpha occ-orbitals] [beta occ-orbitals]  state 1   CI coefficient
+  [0]                  [1]                            -0.707106781187
+  [1]                  [0]                             0.707106781187
+  [alpha occ-orbitals] [beta occ-orbitals]  state 2   CI coefficient
+  [0]                  [1]                             0.707106781187
+  [1]                  [0]                             0.707106781187
+  [alpha occ-orbitals] [beta occ-orbitals]  state 3   CI coefficient
+  [0]                  [0]                             0.112827368710
+  [1]                  [1]                             0.993614605805
+ ** Mulliken pop on meta-lowdin orthogonal AOs  **
+ ** Mulliken pop  **
+pop of  0 H 1s            1.00000
+pop of  1 H 1s            1.00000
+ ** Mulliken atomic charges  **
+charge of    0H =      0.00000
+charge of    1H =      0.00000
+Mulliken spin population analysis on meta-Lowdin AOs:
+ ** Mulliken pop on meta-lowdin orthogonal AOs  **
+ ** Mulliken pop  **
+pop of  0 H 1s            0.00000
+pop of  1 H 1s            0.00000
+ ** Mulliken atomic charges  **
+charge of    0H =      1.00000
+charge of    1H =      1.00000
+spop of 0 H 1s          0.00000
+spop of 1 H 1s          0.00000
+Mulliken atomic spins:
+spin of  0H =      0.00000
+spin of  1H =      0.00000
+
+******** <class 'pyscf.mcscf.casci.CASCI'> ********
+CAS (1e+1e, 2o), ncore = 0, nvir = 0
+natorb = False
+canonicalization = True
+sorting_mo_energy = False
+max_memory 4000 MB (current use 251 MB)
+******** <class 'pyscf.fci.direct_spin1.FCISolver'> ********
+max. cycles = 200
+conv_tol = 1e-08
+davidson only = False
+linear dependence = 1e-12
+level shift = 0.001
+max iter space = 12
+max_memory 4000 MB
+nroots = 4
+pspace_size = 400
+spin = None
+
+WARN: Mulitple states found in CASCI solver. First state is used to compute the Fock matrix and natural orbitals in active space.
+
+Density matrix diagonal elements [1.97453997 0.02546003]
+CASCI converged
+CASCI state   0  E = -1.13727017466090  E(CI) = -1.85102416834852  S^2 = 0.0000000
+CASCI state   1  E = -0.532479006886172  E(CI) = -1.24623300057379  S^2 = 2.0000000
+CASCI state   2  E = -0.169901390463181  E(CI) = -0.883655384150799  S^2 = 0.0000000
+CASCI state   3  E = 0.479836118244279  E(CI) = -0.233917875443339  S^2 = 0.0000000

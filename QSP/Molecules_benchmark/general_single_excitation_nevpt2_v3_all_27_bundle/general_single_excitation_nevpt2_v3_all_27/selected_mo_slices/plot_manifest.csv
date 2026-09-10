@@ -1,0 +1,3 @@
+checkpoint,source_key,spin_channel,mo_1based,irrep,occupation,energy_Eh,phase_factor,component,offset_bohr,vmax,status,error,output_png
+prepared_cases/08_Streptocyanine_C1/rhf.chk,scf/mo_coeff,alpha,11,B1,2.0,-0.7936076868685679,1.0,real,0.0,,SKIPPED,Orbital is numerically zero on the requested slice,
+prepared_cases/08_Streptocyanine_C1/rhf.chk,scf/mo_coeff,alpha,11,B1,2.0,-0.7936076868685679,1.0,real,0.7,0.24297899850776267,OK,,selected_mo_slices/mo011_B1_offset_p0p70_real.png

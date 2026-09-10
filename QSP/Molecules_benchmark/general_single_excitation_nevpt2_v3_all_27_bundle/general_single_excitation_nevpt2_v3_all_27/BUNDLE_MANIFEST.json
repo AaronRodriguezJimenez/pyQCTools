@@ -1,0 +1,45 @@
+{
+  "bundle_version": "3.0",
+  "scope": "27 conservative single-excitation-dominated benchmark molecules, including Acetaldehyde and Furan",
+  "molecule_count": 27,
+  "state_count": 202,
+  "valence_state_count": 143,
+  "rydberg_state_count": 59,
+  "files": [
+    {
+      "name": "04_furan_nevpt2_valence.py",
+      "size_bytes": 42897,
+      "sha256": "835786f6e2c45d91e64319e3ccd935574f5557f0265b68b95c7ab715c34572a7"
+    },
+    {
+      "name": "05_acetaldehyde_nevpt2_npi.py",
+      "size_bytes": 59278,
+      "sha256": "515e8aa3b5800d83f098ca4639846e5e651b0ef552b8b5ffbc453c9d430a843c"
+    },
+    {
+      "name": "06_general_single_excitation_nevpt2_v3.py",
+      "size_bytes": 68923,
+      "sha256": "85ab9af64e3cd9b58cabe3b180253412dcef761a0d6ace5ec14d6a53d32a21b0"
+    },
+    {
+      "name": "BENCHMARK_SCOPE.md",
+      "size_bytes": 1307,
+      "sha256": "0b88109988402e96b893f977b621ed783e2c68eae842960a2ab590b1cc1ad823"
+    },
+    {
+      "name": "DIAZOMETHANE_A1_TROUBLESHOOTING.md",
+      "size_bytes": 4905,
+      "sha256": "7cb1672c634d4c3094f1068931ac563a7fb03e9639ab3847ff0953268ed29411"
+    },
+    {
+      "name": "GENERAL_SINGLE_EXCITATION_NEVPT2_WORKFLOW.md",
+      "size_bytes": 7290,
+      "sha256": "4564ccac420f89c5b0f8e17d1affc0392e7bbc5c2fbfa2b6a918e957153bef63"
+    },
+    {
+      "name": "benchmark_single_excitation_cases.json",
+      "size_bytes": 95804,
+      "sha256": "91e9e7d2bdf55ff9cf2bbc3fe386d8e7ee176cbe603ea1f977c68550211be09c"
+    }
+  ]
+}

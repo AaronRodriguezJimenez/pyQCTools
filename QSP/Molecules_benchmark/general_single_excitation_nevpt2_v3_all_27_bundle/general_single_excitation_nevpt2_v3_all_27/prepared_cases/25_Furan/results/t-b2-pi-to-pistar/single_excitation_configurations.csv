@@ -1,0 +1,3 @@
+rank,active_spatial_occupation,aggregated_weight,hole_active_orbital_1based,hole_full_mo_1based,hole_irrep,particle_active_orbital_1based,particle_full_mo_1based,particle_irrep
+1,[2 2 1 1 0 0],0.8083846282612043,3,18,A2,4,19,B1
+2,[2 1 2 0 1 0],0.11421009836935295,2,17,B1,5,20,A2

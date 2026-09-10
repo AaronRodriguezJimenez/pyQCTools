@@ -1,0 +1,9 @@
+{
+  "spin_2s": 0,
+  "wfnsym": "A1",
+  "nroots": 1,
+  "e_tot_Eh": [
+    -147.62646215331
+  ],
+  "note": "CASCI metadata only; PySCF SymAdaptedCASCI has no chkfile attribute."
+}

@@ -1,0 +1,62 @@
+{
+  "workflow_version": "3.0",
+  "molecule": "Streptocyanine-C1",
+  "coordinates_index": 8,
+  "formula": "CH5N2",
+  "basis": "sto-3g",
+  "unit": "Bohr",
+  "charge": 1,
+  "detected_topgroup": "C2v",
+  "detected_group": "C2v",
+  "available_irreps": [
+    "A1",
+    "A2",
+    "B1",
+    "B2"
+  ],
+  "ground_wfnsym": "A1",
+  "molecule_default_active_mos_1based": [
+    11,
+    12,
+    13
+  ],
+  "cli_active_mos_override": null,
+  "state_active_spaces": {
+    "s-b2-pi-to-pistar": {
+      "active_mos_1based": [
+        11,
+        12,
+        13
+      ],
+      "active_space_electrons": 4,
+      "active_space_orbitals": 3,
+      "selected_active_irrep_counts": {
+        "A2": 1,
+        "B1": 2
+      },
+      "sa_target_nroots_used": 1,
+      "casci_nroots_used": 1
+    },
+    "t-b2-pi-to-pistar": {
+      "active_mos_1based": [
+        11,
+        12,
+        13
+      ],
+      "active_space_electrons": 4,
+      "active_space_orbitals": 3,
+      "selected_active_irrep_counts": {
+        "A2": 1,
+        "B1": 2
+      },
+      "sa_target_nroots_used": 1,
+      "casci_nroots_used": 1
+    }
+  },
+  "pyscf_version": "2.12.0",
+  "successful_states": [
+    "s-b2-pi-to-pistar",
+    "t-b2-pi-to-pistar"
+  ],
+  "failed_states": []
+}

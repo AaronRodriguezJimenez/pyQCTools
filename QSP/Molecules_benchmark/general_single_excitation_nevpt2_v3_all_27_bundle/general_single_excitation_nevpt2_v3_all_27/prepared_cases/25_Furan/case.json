@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "registry_file": "/home/aaron/PycharmProjects/pyQCTools/QSP/Molecules_benchmark/general_single_excitation_nevpt2_v3_all_27_bundle/general_single_excitation_nevpt2_v3_all_27/benchmark_single_excitation_cases.json",
+  "coordinates_file": "/home/aaron/PycharmProjects/pyQCTools/QSP/Molecules_benchmark/coordinates",
+  "molecule": "Furan",
+  "coordinates_index": 25,
+  "formula": "C4H4O",
+  "charge": 0,
+  "basis": "sto-3g",
+  "unit": "Bohr",
+  "symmetry": true,
+  "symmetry_subgroup": null,
+  "detected_topgroup": "C2v",
+  "detected_group": "C2v",
+  "available_irreps": [
+    "A1",
+    "A2",
+    "B1",
+    "B2"
+  ],
+  "ground_wfnsym": "A1",
+  "active_mos_1based": [
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+  ],
+  "active_space_status": "PROVISIONAL_FRONTIER_SUGGESTION_REQUIRES_INSPECTION",
+  "selected_state_keys": [
+    "s-b2-pi-to-pistar",
+    "s-a1-pi-to-pistar",
+    "t-b2-pi-to-pistar",
+    "t-a1-pi-to-pistar"
+  ],
+  "state_overrides": {
+    "s-b2-pi-to-pistar": {
+      "pyscf_wfnsym": "B2",
+      "target_root": 0,
+      "active_mos_1based": [],
+      "sa_target_nroots": null,
+      "casci_nroots": null,
+      "expected_active_irrep_counts": {},
+      "comment": "Verify symmetry, target root, state-average root count, and state-specific active space. Empty active_mos_1based inherits the molecule-level active space."
+    },
+    "s-a1-pi-to-pistar": {
+      "pyscf_wfnsym": "A1",
+      "target_root": 1,
+      "active_mos_1based": [],
+      "sa_target_nroots": null,
+      "casci_nroots": null,
+      "expected_active_irrep_counts": {},
+      "comment": "Verify symmetry, target root, state-average root count, and state-specific active space. Empty active_mos_1based inherits the molecule-level active space."
+    },
+    "t-b2-pi-to-pistar": {
+      "pyscf_wfnsym": "B2",
+      "target_root": 0,
+      "active_mos_1based": [],
+      "sa_target_nroots": null,
+      "casci_nroots": null,
+      "expected_active_irrep_counts": {},
+      "comment": "Verify symmetry, target root, state-average root count, and state-specific active space. Empty active_mos_1based inherits the molecule-level active space."
+    },
+    "t-a1-pi-to-pistar": {
+      "pyscf_wfnsym": "A1",
+      "target_root": 0,
+      "active_mos_1based": [],
+      "sa_target_nroots": null,
+      "casci_nroots": null,
+      "expected_active_irrep_counts": {},
+      "comment": "Verify symmetry, target root, state-average root count, and state-specific active space. Empty active_mos_1based inherits the molecule-level active space."
+    }
+  },
+  "benchmark_notes": [
+    "The authors explicitly describe the selected Furan excited states as having highly dominant single-excitation character.",
+    "The specialized Furan script included in this bundle targets the four valence pi->pi* states with a CAS(6,5) proof-of-concept workflow."
+  ],
+  "instructions": [
+    "Inspect canonical_orbitals.csv and canonical_orbitals.molden.",
+    "Replace active_mos_1based with a chemically justified default active space.",
+    "Use state_overrides[STATE].active_mos_1based when a target needs a different space.",
+    "Check every pyscf_wfnsym against available_irreps.",
+    "Check target_root using root_scan.csv; registry values are guesses.",
+    "Set sa_target_nroots when extra roots were included in the benchmark state average.",
+    "Rydberg states require diffuse functions and suitable diffuse active orbitals."
+  ]
+}
