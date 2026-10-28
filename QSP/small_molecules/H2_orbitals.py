@@ -2,9 +2,9 @@ from pyscf import gto, scf, lo, mcscf
 from pyscf.tools import cubegen
 from pyqctools.geometries import H2
 
-
+bas = "cc-pvdz"
 mol = gto.M(atom=H2(),
-            basis='cc-pvdz',
+            basis=bas,
 )
 
 # 2. Run Restricted Hartree-Fock (RHF)
@@ -40,9 +40,28 @@ print(f"Total HF energy: {ehf_val}")
 ss = mf.spin_square()
 print(f"Spin square <S^2>: {ss[0]}")
 
-print("Orbital idx   Energy")
+print(f"{bas} - Orbital idx   Energy")
 for i, (e, occ) in enumerate(zip(mf.mo_energy, mf.mo_occ)):
     print(f"{i+1:3d}  {e:12.6f}  occ={occ}")
 
-cubegen.orbital(mol, '/Users/admin/h2_mo1.cube', mf.mo_coeff[:,0], nx=80, ny=80, nz=80) #sigma1
-cubegen.orbital(mol, '/Users/admin/h2_mo2.cube', mf.mo_coeff[:,1], nx=80, ny=80, nz=80) #sigma1*
+filename = f"H2_mo1_{bas}.cube"
+cubegen.orbital(mol, filename, mf.mo_coeff[:,0], nx=80, ny=80, nz=80) #sigma1
+filename = f"H2_mo2_{bas}.cube"
+cubegen.orbital(mol, filename, mf.mo_coeff[:,1], nx=80, ny=80, nz=80) #sigma1*
+#Other virtual orbitals
+filename = f"H2_mo3_{bas}.cube"
+cubegen.orbital(mol, filename, mf.mo_coeff[:,2], nx=80, ny=80, nz=80) #sigma1*
+filename = f"H2_mo4_{bas}.cube"
+cubegen.orbital(mol, filename, mf.mo_coeff[:,3], nx=80, ny=80, nz=80) #sigma1*
+filename = f"H2_mo5_{bas}.cube"
+cubegen.orbital(mol, filename, mf.mo_coeff[:,4], nx=80, ny=80, nz=80) #sigma1*
+filename = f"H2_mo6_{bas}.cube"
+cubegen.orbital(mol, filename, mf.mo_coeff[:,5], nx=80, ny=80, nz=80) #sigma1*
+filename = f"H2_mo7_{bas}.cube"
+cubegen.orbital(mol, filename, mf.mo_coeff[:,6], nx=80, ny=80, nz=80) #sigma1*
+filename = f"H2_mo8_{bas}.cube"
+cubegen.orbital(mol, filename, mf.mo_coeff[:,7], nx=80, ny=80, nz=80) #sigma1*
+filename = f"H2_mo9_{bas}.cube"
+cubegen.orbital(mol, filename, mf.mo_coeff[:,8], nx=80, ny=80, nz=80) #sigma1*
+filename = f"H2_mo10_{bas}.cube"
+cubegen.orbital(mol, filename, mf.mo_coeff[:,9], nx=80, ny=80, nz=80) #sigma1*

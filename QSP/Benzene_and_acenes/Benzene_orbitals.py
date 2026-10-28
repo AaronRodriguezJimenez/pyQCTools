@@ -56,13 +56,6 @@ for i, (e, occ) in enumerate(zip(mf.mo_energy, mf.mo_occ)):
 # The active space of the benzene (6e,6o) contains the following
 # canonical orbitals
 # pi_orbital_space = [17,20,21,22,23,30]
-#cubegen.orbital(mol, '/Users/admin/PycharmProjects/pyQCTools/QSP/Benzene_and_acenes/Benz_mo17.cube', mf.mo_coeff[:,16], nx=80, ny=80, nz=80) #pi1
-#cubegen.orbital(mol, '/Users/admin/PycharmProjects/pyQCTools/QSP/Benzene_and_acenes/Benz_mo20.cube', mf.mo_coeff[:,19], nx=80, ny=80, nz=80) #pi2
-#cubegen.orbital(mol, '/Users/admin/PycharmProjects/pyQCTools/QSP/Benzene_and_acenes/Benz_mo21.cube', mf.mo_coeff[:,20], nx=80, ny=80, nz=80) #pi3 HOMO
-#cubegen.orbital(mol, '/Users/admin/PycharmProjects/pyQCTools/QSP/Benzene_and_acenes/Benz_mo22.cube', mf.mo_coeff[:,21], nx=80, ny=80, nz=80) #pi4 LUMO
-#cubegen.orbital(mol, '/Users/admin/PycharmProjects/pyQCTools/QSP/Benzene_and_acenes/Benz_mo23.cube', mf.mo_coeff[:,22], nx=80, ny=80, nz=80) #pi5
-#cubegen.orbital(mol, '/Users/admin/PycharmProjects/pyQCTools/QSP/Benzene_and_acenes/Benz_mo30.cube', mf.mo_coeff[:,29], nx=80, ny=80, nz=80) #pi6
-
 # However, for CASSCF and integral extraction routines,
 # since they are not ordered, we need to reorder them
 pi_orbital_space = [17,20,21,22,23,30]
@@ -78,8 +71,8 @@ ncas = mc.ncas
 print(mc.ncore)
 print(mc.ncas)
 
-#print("Generating cubes AFTER sorting...")
-#for i in range(ncas):
-#    idx = ncore + i
-#    cubegen.orbital(mol, f"/Users/admin/after_active_{i}.cube", C_active[:, idx])
+print("Generating cubes AFTER sorting...")
+for i in range(ncas):
+    idx = ncore + i
+    cubegen.orbital(mol, f"Benzene_active_{i}.cube", C_active[:, idx])
 

@@ -58,6 +58,7 @@ print("Orbital idx   Energy")
 for i, (e, occ) in enumerate(zip(mf.mo_energy, mf.mo_occ)):
     print(f"{i+1:3d}  {e:12.6f}  occ={occ}")
 
+# compute and save tensors with full orbital set
 from src.pyqctools.int_fcns import get_restricted_ints_full
 from src.pyqctools.int_fcns import save_restricted_integrals
 
