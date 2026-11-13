@@ -41,8 +41,9 @@ def save_unrestricted_integrals(b, h0, h1a, h1b, eri_aa, eri_bb, eri_ab, folder=
 
 def get_restricted_ints_full(mol, mf, localized=False):
     """
-    Get molecular integrals from a restricted scf scheme (mf).
+    Get molecular integrals in chemist notation from a restricted scf scheme (mf).
     Do not supports ncore frozen orbitals (zero means full orbital space)
+
     """
     print("Getting restricted integrals... ")
     print(f"Localized orbitals: {localized}")
